@@ -25,6 +25,10 @@ exports.postAddProduct = (req,res,next) => {
 }
 
 exports.getProduct = async (req, res, next) => {
-    const orders = await Product.find();
-    res.status(200).json(orders);
+    try {
+        const products = await Product.find();
+        res.status(200).json(products);  
+    } catch (err) {
+        console.log("blad wczytania " + err)
+    }
 }
