@@ -15,7 +15,11 @@ export default function Home(){
     const { data: products, isLoading, isError } = useQuery({queryKey: ["Products"], queryFn: fetchProducts})
     return (
         <div>
-            <input type="text" placeholder="Search" id="filtredProduct" name="filtredProduct" />
+            <div className="input-container">
+                <input type="text" placeholder="Search..." id="filtredProduct" name="filtredProduct" />
+                <button className="search-button btn">Search</button>
+            </div>
+
             <div className="products">
                 {
                     isLoading 

@@ -1,5 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import "../../styles/AddProduct.css"
+import "../../styles/utilStyles/utilStyles.css"
 
 export default function AddProduct(){
     const queryClient = useQueryClient()
@@ -20,24 +22,27 @@ export default function AddProduct(){
         addProduct.mutate({title, price, imgUrl, description})
     }
     return (
-        <div>
-            <h1>Add product</h1>
-            <form onSubmit={handleSubmit}>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required/>
+        <div className="container">
+            <div className="add-product-container">
+                <h1>Add product</h1>
+                <form onSubmit={handleSubmit}>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required/>
 
-                <label for="price">Price:</label>
-                <input type="text" id="price" name="price" required/>
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" required/>
 
-                <label for="imgUrl">img URL:</label>
-                <input type="text" id="imgUrl" name="imgUrl" />
+                    <label for="imgUrl">img URL:</label>
+                    <input type="text" id="imgUrl" name="imgUrl" />
 
-                <label for="description">Description:</label>
-                <textarea name="description" id="description"></textarea>
+                    <label for="description">Description:</label>
+                    <textarea name="description" id="description" rows="5" cols="65"></textarea>
 
-                <button type="submit">Add product</button>
-            </form>
+                    <button type="submit" className="btn">Add product</button>
+                </form>
+            </div>
         </div>
+        
 
         
     )

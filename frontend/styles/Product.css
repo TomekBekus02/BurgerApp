@@ -10,6 +10,8 @@
     border-radius: 20px;
     width: 350px;
     height: 400px;
+}
+.product-box:nth-child(n+4){
     margin-top: 40px;
 }
 .product h2{
