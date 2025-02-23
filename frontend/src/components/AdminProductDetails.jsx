@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom"
+import '../../styles/componentsStyles/AdminProductDetails.css'
 
 export default function AdminProductDetails({id, imgURL, title, price}){
     const navigate = useNavigate();
@@ -18,23 +19,26 @@ export default function AdminProductDetails({id, imgURL, title, price}){
                     <p>{price}zł</p>
                 </div>
                 <h2>{title}</h2>
-                <div className="toppings-container">
-                    {
-                        isLoading 
-                        ? <p>Loading...</p>
-                        : data.toppings.items.length > 0
-                            ? 
-                                data.toppings.items.map((topping) => {
-                                    return (
-                                        <div key={topping._id} className="topping-box">
-                                            <p>{topping.toppingId.title}</p>
-                                            <p>{topping.toppingId.price}</p>
-                                        </div>
-                                    )
-                                })
-                            :
-                                <p>No any toppings</p>
-                    }
+                <div className="toppings-box">
+                    <h3>Product Toppings</h3>
+                    <div className="toppings-container">
+                        {
+                            isLoading 
+                            ? <p>Loading...</p>
+                            : data.toppings.items.length > 0
+                                ? 
+                                    data.toppings.items.map((topping) => {
+                                        return (
+                                            <div key={topping._id} className="topping-box">
+                                                <p>{topping.toppingId.title}</p>
+                                                <p>{topping.toppingId.price} zł</p>
+                                            </div>
+                                        )
+                                    })
+                                :
+                                    <p>No any toppings</p>
+                        }
+                    </div>
                 </div>
                 <div className="button-container">
                     <button 

@@ -1,0 +1,30 @@
+.product{
+    height: 100%;
+}
+.product h3{
+    text-align: center;
+    margin-top: 5px;
+}
+.toppings-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+}
+.toppings-container p{
+    text-align: center;
+}
+.topping-box{
+    margin: 5px;
+    text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color .2s ease-in;
+    border-radius: 30px;
+}
+.topping-box:hover{
+    background-color: #da6a6abf;
+}
+.toppings-box{
+    border-top: 1px dashed red;
+    margin-top: 5px;
+}
