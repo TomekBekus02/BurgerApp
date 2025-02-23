@@ -21,14 +21,42 @@ exports.postAddProduct = (req,res,next) => {
         .catch(err => {
             console.log(err)
         })
-    //res.status(201).json(product);
+    res.status(201).json(product);
 }
 
-exports.getProduct = async (req, res, next) => {
+exports.editProduct = async (req, res, next) => {
     try {
-        const products = await Product.find();
-        res.status(200).json(products);  
+        const id = req.params.productId;
+        const product = await Product.findById(id);
+        if(!product){
+            return res.status(404).json({message: "Product not found!"});
+        }
+        res.status(200).json(product);
     } catch (err) {
-        console.log("blad wczytania " + err)
+        console.log(err);
+    }
+}
+
+exports.postEditProduct = async (req, res, next) => {
+    try {
+        const updatedTitle = req.body.title;
+        const updatedPrice = req.body.price;
+        const updatedImgUrl = req.body.imgUrl;
+        const updatedDescription = req.body.description;
+        const id = req.params.productId;
+        Product.findById(id)
+        .then(product => {
+            product.title = updatedTitle;
+            product.price = updatedPrice;
+            product.imgUrl = updatedImgUrl;
+            product.description = updatedDescription;
+            return product.save();
+        }).then(product => {
+            res.status(200).json(product);
+        })
+        .catch(err => console.log(err));
+
+    } catch (err) {
+        err => console.log(err)
     }
 }

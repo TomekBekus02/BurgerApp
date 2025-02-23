@@ -16,6 +16,9 @@ export default function MainNavigation(){
                     <Link to="#">Your Cart</Link>
                 </li>
                 <li>
+                    <Link to="/admin/admin-home">Admin Home</Link>
+                </li>
+                <li>
                     <Link to="/admin/add-product">Add product</Link>
                 </li>
             </ul>

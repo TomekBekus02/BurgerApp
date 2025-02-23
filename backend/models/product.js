@@ -18,6 +18,15 @@ const productSchema = new Schema({
     description:{
         type:String,
         required:true
+    },
+    toppings: {
+        items: [
+            {
+                toppingId: {type: Schema.Types.ObjectId, ref: "Topping", required: true},
+                isAdded: {type: Boolean, require: true}
+            }
+
+        ]
     }
 })
 

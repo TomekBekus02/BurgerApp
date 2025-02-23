@@ -2,12 +2,19 @@ import { useQueryClient, useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import "../../styles/AddProduct.css"
 import "../../styles/utilStyles/utilStyles.css"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+
 
 export default function AddProduct(){
+    const navigate = useNavigate()
     const queryClient = useQueryClient()
     const addProduct = useMutation({
         mutationFn: (newOrder) => axios.post("http://localhost:3000/admin/add-product", newOrder),
-        onSuccess: () => queryClient.invalidateQueries(["Products"])
+        onSuccess: () => {
+            queryClient.invalidateQueries(["Products"])
+            navigate("../home")
+        }
     });
 
     const handleSubmit = (e) => {
@@ -21,6 +28,7 @@ export default function AddProduct(){
 
         addProduct.mutate({title, price, imgUrl, description})
     }
+
     return (
         <div className="container">
             <div className="add-product-container">

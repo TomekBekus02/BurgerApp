@@ -1,18 +1,16 @@
 import { Query, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-import Product from '../components/Product'
+import AdminProduct from '../components/AdminProduct'
 import "../../styles/Main.css"
 
 const fetchProducts = async () => {
     const { data } = await axios.get('http://localhost:3000/products')
-    console.log("pobrane dane: " + data)
     return data
 }
+export default function AdminHome(){
 
-export default function Home(){
-
-    const { data: products, isLoading, isError } = useQuery({queryKey: ["Products"], queryFn: fetchProducts})
+    const {data: products, isLoading, isError} = useQuery({queryKey: ["Products"], queryFn: fetchProducts})
     return (
         <div>
             <div className="input-container">
@@ -27,7 +25,7 @@ export default function Home(){
                         : (products.length > 0 || isError)
                             ? products.map(product => {
                                 return (
-                                    <Product 
+                                    <AdminProduct 
                                         id={product._id}
                                         title={product.title}
                                         imgURL={product.imgUrl}
@@ -36,7 +34,6 @@ export default function Home(){
                                 )
                             })
                             : <p>No Products</p>
-
                 }
             </div>
         </div>
