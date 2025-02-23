@@ -14,7 +14,7 @@ export default function AdminProduct({id, imgURL, title, price}){
                 <h2>{title}</h2>
                 <div className="button-container">
                     <button className='details-button btn' onClick={() => navigate(`../edit-product/${id}`)}>Edit Product</button>
-                    <button className='add-cart-button btn' onClick={() => navigate(`../add-topping/${id}`)}>Add Toppings</button>
+                    <button className='add-cart-button btn' onClick={() => navigate(`../modify-topping/${id}`)}>Modify Toppings</button>
                 </div>
             </div>
         </div>

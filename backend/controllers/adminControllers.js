@@ -1,4 +1,6 @@
 const Product = require('../models/product')
+const Topping = require('../models/product-topping')
+const mongoose = require('mongoose');
 
 exports.postAddProduct = (req,res,next) => {
     const title = req.body.title;
@@ -58,5 +60,59 @@ exports.postEditProduct = async (req, res, next) => {
 
     } catch (err) {
         err => console.log(err)
+    }
+}
+
+exports.getFindProduct = async (req, res, next) => {
+    try {
+        const id = req.params.productId;
+        Product.findById(id)
+        .then(product => {
+            
+            res.status(200).json(product);
+        })
+        .catch(err => console.log(err));
+    } catch (error) {
+        
+    }
+}
+
+exports.postAddTopping = async (req, res, next) => {
+    try {
+        const productId = req.params.productId;
+        const title = req.body.title;
+        const price = req.body.price;
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            console.log("bledny type " + productId);
+            return res.status(400).json({ error: 'Nieprawidłowy productId' });
+        }
+        const topping = new Topping({
+            title:title,
+            price:price,
+            productId:productId
+        })
+        const AddedTopping = await topping.save()
+        console.log("topping added");
+        const product = await Product.findById(productId);
+        await product.addToppingToProduct(AddedTopping);
+        res.status(200).json(AddedTopping);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+exports.getToppings = async (req, res, next) => {
+    try {
+        const productId = req.params.productId;
+        const product = await Product.findById(productId).populate({
+            path: 'toppings.items.toppingId',
+            select: 'title price'
+        });
+        console.log("wypisz ");
+        console.log(JSON.stringify(product, null, 2));
+        res.status(200).json(product);
+    } catch (error) {
+        console.log(error);
     }
 }

@@ -30,4 +30,17 @@ const productSchema = new Schema({
     }
 })
 
+productSchema.methods.addToppingToProduct = function(topping) {
+    const updatedToppingsItems = [...this.toppings.items];
+    updatedToppingsItems.push({ 
+        toppingId: topping._id, 
+        isAdded: false 
+    });
+    const updatedProductToppings = {
+        items: updatedToppingsItems
+    }
+    this.toppings = updatedProductToppings;
+    return this.save();
+}
+
 module.exports = mongoose.model('Product', productSchema);
