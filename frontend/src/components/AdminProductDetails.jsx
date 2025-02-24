@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom"
 import '../../styles/componentsStyles/AdminProductDetails.css'
+import ToppingModify from "./ToppingModify";
 
 export default function AdminProductDetails({id, imgURL, title, price}){
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function AdminProductDetails({id, imgURL, title, price}){
     const {data, isLoading, isError} = useQuery({queryKey: ["Toppings"], queryFn: () => fetchToppings(productId)})
     return (
         <div key={id} className="product-box">
-            <div className="product">
+            <div className="admin-product product">
                 <div className='imgContainer'>
                     <img src={`${imgURL}`} alt={`${title}`} />
                     <p>{price}zł</p>
@@ -29,10 +30,11 @@ export default function AdminProductDetails({id, imgURL, title, price}){
                                 ? 
                                     data.toppings.items.map((topping) => {
                                         return (
-                                            <div key={topping._id} className="topping-box">
-                                                <p>{topping.toppingId.title}</p>
-                                                <p>{topping.toppingId.price} zł</p>
-                                            </div>
+                                            <ToppingModify 
+                                                price={topping.toppingId.price} 
+                                                title={topping.toppingId.title}
+                                                id={topping._id}
+                                            />
                                         )
                                     })
                                 :

@@ -1,0 +1,16 @@
+.dialog-container h1{
+    margin: 10px;
+    text-transform: none;
+}
+.modify-button{
+    background-color: #ebeb1f;
+}
+.modify-button:hover{
+    background-color: #bdbd40;
+}
+.delete-button{
+    background-color: #e51919;
+}
+.delete-button:hover{
+    background-color: #de3f3f;
+}
