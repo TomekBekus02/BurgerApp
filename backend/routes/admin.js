@@ -4,10 +4,12 @@ const router = express.Router();
 const adminControllers = require('../controllers/adminControllers')
 
 router.post('/add-product', adminControllers.postAddProduct);
-router.get('/edit-product/:productId', adminControllers.editProduct);
+router.get('/edit-product/:productId', adminControllers.getEditProduct);
 router.post('/edit-product/:productId', adminControllers.postEditProduct);
 router.get('/find-product/:productId', adminControllers.getFindProduct);
 router.post('/add-topping/:productId', adminControllers.postAddTopping);
 router.get('/get-toppings/:productId', adminControllers.getToppings);
+router.get('/edit-topping/:toppingId', adminControllers.getEditTopping);
+router.post('/edit-topping/:toppingId', adminControllers.postEditTopping);
 
 module.exports = router;

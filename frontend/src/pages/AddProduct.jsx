@@ -13,7 +13,7 @@ export default function AddProduct(){
         mutationFn: (newOrder) => axios.post("http://localhost:3000/admin/add-product", newOrder),
         onSuccess: () => {
             queryClient.invalidateQueries(["Products"])
-            navigate("../home")
+            navigate("/")
         }
     });
 

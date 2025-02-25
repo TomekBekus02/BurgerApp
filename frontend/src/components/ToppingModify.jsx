@@ -8,7 +8,7 @@ export default function ToppingModify({title, price, id}){
     }
     return (
         <div key={id} className="topping-box" onClick={handleToppingModify}>
-            <DialogTopping ref={dialog}/>
+            <DialogTopping ref={dialog} toppingId={id}/>
             <p>{title}</p>
             <p>{price}zł</p>
         </div>

@@ -6,11 +6,11 @@
     background-color: #ebeb1f;
 }
 .modify-button:hover{
-    background-color: #bdbd40;
+    background-color: #fdfd36;
 }
 .delete-button{
     background-color: #e51919;
 }
 .delete-button:hover{
-    background-color: #de3f3f;
+    background-color: #ff4040;
 }

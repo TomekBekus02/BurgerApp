@@ -18,7 +18,6 @@ exports.postAddProduct = (req,res,next) => {
         .save()
         .then(result => {
             console.log('Created product: ');
-            console.log(result);
         })
         .catch(err => {
             console.log(err)
@@ -26,7 +25,7 @@ exports.postAddProduct = (req,res,next) => {
     res.status(201).json(product);
 }
 
-exports.editProduct = async (req, res, next) => {
+exports.getEditProduct = async (req, res, next) => {
     try {
         const id = req.params.productId;
         const product = await Product.findById(id);
@@ -101,7 +100,6 @@ exports.postAddTopping = async (req, res, next) => {
     }
 }
 
-
 exports.getToppings = async (req, res, next) => {
     try {
         const productId = req.params.productId;
@@ -112,6 +110,40 @@ exports.getToppings = async (req, res, next) => {
         console.log("wypisz ");
         console.log(JSON.stringify(product, null, 2));
         res.status(200).json(product);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.getEditTopping = async (req, res, next) => {
+    try {
+        const toppingId = req.params.toppingId;
+        const topping = await Topping.findById(toppingId);
+        res.status(200).json(topping);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.postEditTopping = (req, res, next) => {
+    try {
+        const toppingId = req.params.toppingId
+        const title = req.body.title;
+        const price = req.body.price;
+
+        Topping.findById(toppingId)
+            .then(topping => {
+                topping.title = title;
+                topping.price = price;
+                return topping.save()
+            })
+            .then(topping => {
+                console.log(topping);
+                res.status(200).json(topping);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     } catch (error) {
         console.log(error);
     }

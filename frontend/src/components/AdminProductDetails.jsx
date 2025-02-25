@@ -11,7 +11,7 @@ export default function AdminProductDetails({id, imgURL, title, price}){
         const { data } = await axios.get(`http://localhost:3000/admin/get-toppings/${productId}`);
         return data;
     }
-    const {data, isLoading, isError} = useQuery({queryKey: ["Toppings"], queryFn: () => fetchToppings(productId)})
+    const {data, isLoading, isFetching, isError} = useQuery({queryKey: ["Toppings"], queryFn: () => fetchToppings(productId)})
     return (
         <div key={id} className="product-box">
             <div className="admin-product product">
@@ -24,16 +24,16 @@ export default function AdminProductDetails({id, imgURL, title, price}){
                     <h3>Product Toppings</h3>
                     <div className="toppings-container">
                         {
-                            isLoading 
+                            (isLoading || isFetching) 
                             ? <p>Loading...</p>
-                            : data.toppings.items.length > 0
+                            : data.toppings.items.length > 0 
                                 ? 
                                     data.toppings.items.map((topping) => {
                                         return (
                                             <ToppingModify 
                                                 price={topping.toppingId.price} 
                                                 title={topping.toppingId.title}
-                                                id={topping._id}
+                                                id={topping.toppingId._id}
                                             />
                                         )
                                     })

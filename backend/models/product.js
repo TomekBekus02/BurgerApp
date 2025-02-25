@@ -43,4 +43,12 @@ productSchema.methods.addToppingToProduct = function(topping) {
     return this.save();
 }
 
+productSchema.methods.deleteToppingFromProduct = function(toppingId){
+    const updatedToppingsItems = this.toppings.items.filter(topping => {
+        return topping.toppingId.toString() !== toppingId.toString();
+    })
+    this.toppings.items = updatedToppingsItems;
+    return this.save();
+}
+
 module.exports = mongoose.model('Product', productSchema);

@@ -10,6 +10,8 @@ import Home from './pages/Home'
 import AdminHome from './pages/AdminHome'
 import EditProduct from './pages/EditProduct'
 import ModifyTopping from './pages/ModifyTopping'
+import DialogTopping from './components/DialogTopping'
+import EditTopping from './pages/EditTopping'
 
 
 
@@ -30,7 +32,8 @@ const router = createBrowserRouter([
       {path: 'add-product', element: <AddProduct/>},
       {path: 'add-topping/:productId', element: <AddTopping/>},
       {path: 'edit-product/:productId', element: <EditProduct/>},
-      {path: 'modify-topping/:productId', element: <ModifyTopping/>}
+      {path: 'modify-topping/:productId', element: <ModifyTopping/>},
+      {path: 'edit-topping/:productId/:toppingId', element: <EditTopping/>},
     ]
   }
 ])
