@@ -130,7 +130,10 @@ exports.postEditTopping = (req, res, next) => {
         const toppingId = req.params.toppingId
         const title = req.body.title;
         const price = req.body.price;
-
+        if (!mongoose.Types.ObjectId.isValid(toppingId)) {
+            console.log("bledny type " + toppingId);
+            return res.status(400).json({ error: 'Nieprawidłowy productId' });
+        }
         Topping.findById(toppingId)
             .then(topping => {
                 topping.title = title;
@@ -146,5 +149,21 @@ exports.postEditTopping = (req, res, next) => {
             });
     } catch (error) {
         console.log(error);
+    }
+}
+
+exports.deleteTopping = async (req, res, next) => {
+    try {
+        const productId = req.params.productId;
+        const toppingId = req.params.toppingId;
+
+        const product = await Product.findById(productId);
+        await product.deleteToppingFromProduct(toppingId);
+
+        const topping = await Topping.findByIdAndDelete(toppingId);
+        res.status(200).json(topping);
+
+    } catch (error) {
+        console.log(error => console.log(error))
     }
 }

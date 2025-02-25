@@ -12,7 +12,10 @@ const fetchProducts = async () => {
 
 export default function Home(){
 
-    const { data: products, isLoading, isError } = useQuery({queryKey: ["Products"], queryFn: fetchProducts})
+    const { data: products, isLoading,isFetching, isError } = useQuery({
+        queryKey: ["Products"], 
+        queryFn: fetchProducts
+    })
     return (
         <div>
             <div className="input-container">
@@ -22,7 +25,7 @@ export default function Home(){
 
             <div className="products">
                 {
-                    isLoading 
+                    (isLoading || isFetching)  
                         ? <p>Loading...</p> 
                         : (products.length > 0 || isError)
                             ? products.map(product => {

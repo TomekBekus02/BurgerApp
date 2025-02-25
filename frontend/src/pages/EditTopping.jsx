@@ -14,7 +14,8 @@ export default function EditTopping(){
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["Toppings"]);
-            navigate(`/admin/modify-topping/${productId}`)
+            queryClient.invalidateQueries(["Products"]);
+            navigate(`/admin/modify-topping/${productId}`);
         }
     })
     const FetchData = async (toppingId) => {

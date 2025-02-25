@@ -11,12 +11,15 @@ const fetchProduct = async(productId) => {
 export default function ModifyTopping(){
 
     const { productId } = useParams();
-    const {data: product, isLoading, isFetching, isError} = useQuery({queryKey: ["Product"], queryFn: () => fetchProduct(productId)})
+    const {data: product, isLoading, isFetching, isError} = useQuery({
+        queryKey: ["Products"], 
+        queryFn: () => fetchProduct(productId)
+    })
     return (
         <div>
             <h1>Modify Topping</h1>
             {
-                isLoading || isFetching
+                ( isLoading || isFetching )
                     ? <p>Loading...</p> 
                     : <AdminProductDetails
                         id={product._id}

@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {path: 'add-topping/:productId', element: <AddTopping/>},
       {path: 'edit-product/:productId', element: <EditProduct/>},
       {path: 'modify-topping/:productId', element: <ModifyTopping/>},
-      {path: 'edit-topping/:productId/:toppingId', element: <EditTopping/>},
+      {path: 'edit-topping/:toppingId', element: <EditTopping/>},
     ]
   }
 ])

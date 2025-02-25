@@ -19,7 +19,7 @@ export default function EditProduct(){
         return data;
     }
     const { productId } = useParams();
-    const {data: product, isLoading, isError} = useQuery({
+    const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products", productId], 
         queryFn: () => fetchProducts(productId)
     })
@@ -38,7 +38,7 @@ export default function EditProduct(){
             <div className="add-product-container">
                 <h1>Edit product</h1>
                 {
-                    isLoading
+                    (isLoading || isFetching) 
                     ? <p>Loading...</p>
                     :   <form onSubmit={handleSubmit}>
                             <label for="title">Title:</label>
