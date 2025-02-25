@@ -167,3 +167,12 @@ exports.deleteTopping = async (req, res, next) => {
         console.log(error => console.log(error))
     }
 }
+exports.deleteProduct = async (req, res, next) => {
+    try {
+        const productId = req.params.productId
+        const product = await Product.findByIdAndDelete(productId)
+        res.status(200).json(product);
+    } catch (error) {
+        console.log(error);
+    }
+}

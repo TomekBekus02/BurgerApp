@@ -9,8 +9,8 @@ export default function EditTopping(){
     const queryClient = useQueryClient();
 
     const editTopping = useMutation({
-        mutationFn: (editedTopping) => {
-            return axios.post(`http://localhost:3000/admin/edit-topping/${toppingId}`, editedTopping)
+        mutationFn: async (editedTopping) => {
+            return await axios.post(`http://localhost:3000/admin/edit-topping/${toppingId}`, editedTopping)
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["Toppings"]);

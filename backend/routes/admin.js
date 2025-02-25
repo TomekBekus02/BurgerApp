@@ -11,6 +11,7 @@ router.post('/add-topping/:productId', adminControllers.postAddTopping);
 router.get('/get-toppings/:productId', adminControllers.getToppings);
 router.get('/edit-topping/:toppingId', adminControllers.getEditTopping);
 router.post('/edit-topping/:toppingId', adminControllers.postEditTopping);
-router.delete('/delete-topping/:productId/:toppingId', adminControllers.deleteTopping)
+router.delete('/delete-topping/:productId/:toppingId', adminControllers.deleteTopping);
+router.delete('/delete-product/:productId', adminControllers.deleteProduct);
 
 module.exports = router;
