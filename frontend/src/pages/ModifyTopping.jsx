@@ -13,7 +13,7 @@ export default function ModifyTopping(){
     const { productId } = useParams();
     const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products"], 
-        queryFn: () => fetchProduct(productId)
+        queryFn: () => fetchProduct(productId),
     })
     return (
         <div>

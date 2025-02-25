@@ -4,7 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditProduct(){
     const navigate = useNavigate();
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
+    const { productId } = useParams();
+
     const editProduct = useMutation({
         mutationFn: (editedProduct) => {
             return axios.post(`http://localhost:3000/admin/edit-product/${productId}`, editedProduct)
@@ -18,7 +20,7 @@ export default function EditProduct(){
         const { data } = await axios.get(`http://localhost:3000/admin/edit-product/${productId}`)
         return data;
     }
-    const { productId } = useParams();
+
     const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products", productId], 
         queryFn: () => fetchProducts(productId)

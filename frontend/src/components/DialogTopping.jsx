@@ -23,7 +23,7 @@ export default function DialogTopping({ref, toppingId}){
             <h1>What do you want to do?</h1>
             <button 
                 className="btn modify-button"
-                onClick={() => {navigate(`/admin/edit-topping/${toppingId}`)}}
+                onClick={() => {navigate(`/admin/edit-topping/${productId}/${toppingId}`)}}
             >Modify</button>
             <button 
                 className="btn delete-button"

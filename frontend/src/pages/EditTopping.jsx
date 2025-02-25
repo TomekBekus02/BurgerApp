@@ -3,8 +3,7 @@ import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
 export default function EditTopping(){
-    const { toppingId } = useParams();
-    const { productId } = useParams();
+    const { toppingId, productId } = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 

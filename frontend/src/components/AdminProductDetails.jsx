@@ -11,7 +11,10 @@ export default function AdminProductDetails({id, imgURL, title, price}){
         const { data } = await axios.get(`http://localhost:3000/admin/get-toppings/${productId}`);
         return data;
     }
-    const {data, isLoading, isFetching, isError} = useQuery({queryKey: ["Toppings"], queryFn: () => fetchToppings(productId)})
+    const {data, isLoading, isFetching, isError} = useQuery({
+        queryKey: ["Toppings", productId], 
+        queryFn: () => fetchToppings(productId),
+    })
     return (
         <div key={id} className="product-box">
             <div className="admin-product product">
