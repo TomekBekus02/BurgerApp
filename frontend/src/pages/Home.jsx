@@ -3,6 +3,8 @@ import axios from "axios"
 
 import Product from '../components/Product'
 import "../../styles/Main.css"
+import InputFilter from "../components/InputFilter"
+import { useState } from "react"
 
 const fetchProducts = async () => {
     const { data } = await axios.get('http://localhost:3000/products')
@@ -16,19 +18,20 @@ export default function Home(){
         queryKey: ["Products"], 
         queryFn: fetchProducts
     })
+
+    const [filterProductInput, setFilterProductInput] = useState("");
+    const filteredProducts = products?.filter(item => 
+        item.title.replace(/\s+/g,'').toLowerCase().includes(filterProductInput.replace(/\s+/g,'').toLowerCase())        
+    );
     return (
         <div>
-            <div className="input-container">
-                <input type="text" placeholder="Search..." id="filtredProduct" name="filtredProduct" />
-                <button className="search-button btn">Search</button>
-            </div>
-
+            <InputFilter setFilterProductInput={setFilterProductInput}/>
             <div className="products">
                 {
                     (isLoading || isFetching)  
                         ? <p>Loading...</p> 
-                        : (products.length > 0 || isError)
-                            ? products.map(product => {
+                        : (filteredProducts.length > 0 || isError)
+                            ? filteredProducts.map(product => {
                                 return (
                                     <Product 
                                         id={product._id}
