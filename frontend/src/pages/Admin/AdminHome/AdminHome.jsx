@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { Query, useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import AdminProduct from '../components/AdminProduct'
-import "../../styles/Main.css"
-import InputFilter from "../components/InputFilter"
-import { useEffect, useState } from "react"
+
+import AdminProduct from '../../../components/Admin/AdminProduct/AdminProduct'
+import "../../../styles/Main.css"
+import InputFilter from "../../../utils/InputFilter"
+import { filteredProd } from "../../../Logic/filterProductsLogic"
 
 const fetchProducts = async () => {
     const { data } = await axios.get('http://localhost:3000/products')
@@ -18,9 +20,7 @@ export default function AdminHome(){
 
     const [filterProductInput, setFilterProductInput] = useState("");
 
-    const filteredProducts = products?.filter(item => 
-        item.title.replace(/\s+/g,'').toLowerCase().includes(filterProductInput.replace(/\s+/g,'').toLowerCase())        
-    );
+    const filteredProducts = filteredProd(products, filterProductInput);
 
     return (
         <div>

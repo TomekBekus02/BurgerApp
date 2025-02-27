@@ -1,7 +1,7 @@
 import { useRef } from "react"
-import DialogTopping from "./DialogTopping"
+import DialogTopping from "../../../Dialogs/DialogTopping/DialogTopping"
 
-export default function ToppingModify({title, price, id}){
+export default function AdminTopping({title, price, id}){
     const dialog = useRef();
     const handleToppingModify = () => {
         dialog.current.showModal();

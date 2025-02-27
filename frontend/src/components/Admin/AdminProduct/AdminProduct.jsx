@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
-import '../../styles/Product.css'
-import '../../styles/utilStyles/utilStyles.css'
+import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react';
-import DialogProduct from './DialogProduct';
+import DialogProduct from '../../../Dialogs/DialogProduct/DialogProduct';
+import '../../User/Product/Product.css'
+import '../../../styles/utilStyles.css'
 
 export default function AdminProduct({id, imgURL, title, price}){
     const navigate = useNavigate();

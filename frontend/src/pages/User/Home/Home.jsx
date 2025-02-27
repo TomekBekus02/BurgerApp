@@ -1,10 +1,13 @@
 import { Query, useQuery } from "@tanstack/react-query"
+import { useState } from "react"
 import axios from "axios"
 
-import Product from '../components/Product'
-import "../../styles/Main.css"
-import InputFilter from "../components/InputFilter"
-import { useState } from "react"
+//import { filteredProd } from "../../../Logic/filterProductsLogic"
+import Product from '../../../components/User/Product/Product'
+import "../../../styles/Main.css"
+import InputFilter from "../../../utils/InputFilter"
+
+
 
 const fetchProducts = async () => {
     const { data } = await axios.get('http://localhost:3000/products')
@@ -30,7 +33,7 @@ export default function Home(){
                 {
                     (isLoading || isFetching)  
                         ? <p>Loading...</p> 
-                        : (filteredProducts.length > 0 || isError)
+                        : (filteredProducts.length > 0)
                             ? filteredProducts.map(product => {
                                 return (
                                     <Product 

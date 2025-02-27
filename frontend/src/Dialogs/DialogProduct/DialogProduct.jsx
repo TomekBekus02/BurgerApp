@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom"
-import "../../styles/componentsStyles/dialogTopping.css"
-import "../../styles/utilStyles/utilStyles.css"
+import "../DialogTopping/dialogTopping.css"
+import "../../styles/utilStyles.css"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import '../../styles/componentsStyles/dialogProduct.css'
+import './dialogProduct.css'
 
 export default function DialogProduct({ref, productId}){
     const queryClient = useQueryClient();

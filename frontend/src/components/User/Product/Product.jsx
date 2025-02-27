@@ -1,5 +1,5 @@
-import '../../styles/Product.css'
-import '../../styles/utilStyles/utilStyles.css'
+import './Product.css'
+import '../../../styles/utilStyles.css'
 
 export default function product({id, imgURL, title, price}){
     return (

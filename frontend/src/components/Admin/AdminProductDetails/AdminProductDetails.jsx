@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom"
-import '../../styles/componentsStyles/AdminProductDetails.css'
-import ToppingModify from "./ToppingModify";
+import axios from "axios";
+import './AdminProductDetails.css'
+import AdminTopping from "../AdminTopping/AdminTopping";
 
 export default function AdminProductDetails({id, imgURL, title, price}){
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function AdminProductDetails({id, imgURL, title, price}){
                                 ? 
                                     data.toppings.items.map((topping) => {
                                         return (
-                                            <ToppingModify 
+                                            <AdminTopping 
                                                 price={topping.toppingId.price} 
                                                 title={topping.toppingId.title}
                                                 id={topping.toppingId._id}

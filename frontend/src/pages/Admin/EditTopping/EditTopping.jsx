@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import axios from "axios"
 
 export default function EditTopping(){
     const { toppingId, productId } = useParams();

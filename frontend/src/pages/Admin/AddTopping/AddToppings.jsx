@@ -1,10 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom"
-import "../../styles/AddProduct.css"
-import "../../styles/utilStyles/utilStyles.css"
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom"
+import axios from "axios";
 
-export default function AddToppings(){
+import "../AddProduct/AddProduct.css"
+import "../../../styles/utilStyles.css"
+
+export default function AddTopping(){
     const { productId } = useParams();
     const navigate = useNavigate();
 

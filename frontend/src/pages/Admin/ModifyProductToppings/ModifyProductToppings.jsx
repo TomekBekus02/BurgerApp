@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
-import AdminProductDetails from "../components/AdminProductDetails"
 import axios from "axios"
+
+import AdminProductDetails from "../../../components/Admin/AdminProductDetails/AdminProductDetails"
 
 const fetchProduct = async(productId) => {
     const {data} = await axios.get(`http://localhost:3000/admin/find-product/${productId}`)
     return data
 }
 
-export default function ModifyTopping(){
+export default function ModifyProductToppings(){
 
     const { productId } = useParams();
     const {data: product, isLoading, isFetching, isError} = useQuery({

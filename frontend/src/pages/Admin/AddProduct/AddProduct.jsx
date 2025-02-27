@@ -1,10 +1,9 @@
-import { useQueryClient, useMutation } from "@tanstack/react-query"
-import axios from "axios"
-import "../../styles/AddProduct.css"
-import "../../styles/utilStyles/utilStyles.css"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
-
+import { useQueryClient, useMutation } from "@tanstack/react-query"
+import axios from "axios"
+import "./AddProduct.css"
+import "../../../styles/utilStyles.css"
 
 export default function AddProduct(){
     const navigate = useNavigate()

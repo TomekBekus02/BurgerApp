@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom"
-import "../../styles/componentsStyles/dialogTopping.css"
-import "../../styles/utilStyles/utilStyles.css"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+
+import "./dialogTopping.css"
+import "../../styles/utilStyles.css"
 
 export default function DialogTopping({ref, toppingId}){
     const navigate = useNavigate();
