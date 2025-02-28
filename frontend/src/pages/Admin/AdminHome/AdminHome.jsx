@@ -1,26 +1,20 @@
 import { useState } from "react"
-import { Query, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 import AdminProduct from '../../../components/Admin/AdminProduct/AdminProduct'
 import "../../../styles/Main.css"
 import InputFilter from "../../../utils/InputFilter"
 import { filteredProd } from "../../../Logic/filterProductsLogic"
-
-const fetchProducts = async () => {
-    const { data } = await axios.get('http://localhost:3000/products')
-    return data
-}
+import { fetchProducts } from "../../../services/api"
 
 export default function AdminHome(){
     const {data: products, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products"], 
         queryFn: fetchProducts
     });
-
     const [filterProductInput, setFilterProductInput] = useState("");
-
-    const filteredProducts = filteredProd(products, filterProductInput);
+    const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
 
     return (
         <div>

@@ -2,6 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios"
 
+import { fetchProductsById } from "../../../services/api";
+
 export default function EditProduct(){
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -16,14 +18,10 @@ export default function EditProduct(){
             navigate('/admin/admin-home');
         }
     })
-    const fetchProducts = async (productId) => {
-        const { data } = await axios.get(`http://localhost:3000/admin/edit-product/${productId}`)
-        return data;
-    }
 
     const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products", productId], 
-        queryFn: () => fetchProducts(productId)
+        queryFn: () => fetchProductsById(productId)
     })
     const handleSubmit = (e) => {
         e.preventDefault();

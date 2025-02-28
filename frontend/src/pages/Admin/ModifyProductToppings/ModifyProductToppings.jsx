@@ -3,18 +3,14 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 
 import AdminProductDetails from "../../../components/Admin/AdminProductDetails/AdminProductDetails"
-
-const fetchProduct = async(productId) => {
-    const {data} = await axios.get(`http://localhost:3000/admin/find-product/${productId}`)
-    return data
-}
+import { fetchProductsById } from "../../../services/api"
 
 export default function ModifyProductToppings(){
 
     const { productId } = useParams();
     const {data: product, isLoading, isFetching, isError} = useQuery({
-        queryKey: ["Products"], 
-        queryFn: () => fetchProduct(productId),
+        queryKey: ["Products", productId], 
+        queryFn: () => fetchProductsById(productId),
     })
     return (
         <div>

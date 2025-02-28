@@ -2,18 +2,11 @@ import { Query, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import axios from "axios"
 
-//import { filteredProd } from "../../../Logic/filterProductsLogic"
 import Product from '../../../components/User/Product/Product'
 import "../../../styles/Main.css"
 import InputFilter from "../../../utils/InputFilter"
-
-
-
-const fetchProducts = async () => {
-    const { data } = await axios.get('http://localhost:3000/products')
-    console.log("pobrane dane: " + data)
-    return data
-}
+import { filteredProd } from "../../../Logic/filterProductsLogic"
+import { fetchProducts } from "../../../services/api"
 
 export default function Home(){
 
@@ -23,9 +16,8 @@ export default function Home(){
     })
 
     const [filterProductInput, setFilterProductInput] = useState("");
-    const filteredProducts = products?.filter(item => 
-        item.title.replace(/\s+/g,'').toLowerCase().includes(filterProductInput.replace(/\s+/g,'').toLowerCase())        
-    );
+    const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
+
     return (
         <div>
             <InputFilter setFilterProductInput={setFilterProductInput}/>
