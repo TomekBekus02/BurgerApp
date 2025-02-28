@@ -3,15 +3,18 @@ const router = express.Router();
 
 const adminControllers = require('../controllers/adminControllers')
 
-router.post('/add-product', adminControllers.postAddProduct);
-router.get('/edit-product/:productId', adminControllers.getEditProduct);
-router.post('/edit-product/:productId', adminControllers.postEditProduct);
-router.get('/find-product/:productId', adminControllers.getFindProduct);
-router.post('/add-topping/:productId', adminControllers.postAddTopping);
-router.get('/get-toppings/:productId', adminControllers.getToppings);
-router.get('/edit-topping/:toppingId', adminControllers.getEditTopping);
-router.post('/edit-topping/:toppingId', adminControllers.postEditTopping);
-router.delete('/delete-topping/:productId/:toppingId', adminControllers.deleteTopping);
-router.delete('/delete-product/:productId', adminControllers.deleteProduct);
+//Admin Product
+router.post('/product', adminControllers.AddProduct);
+router.put('/product/:productId', adminControllers.UpdateProduct);
+router.delete('/product/:productId', adminControllers.deleteProduct);
+
+//Admin Topping
+router.post('/topping/:productId', adminControllers.AddTopping);
+router.put('/topping/:toppingId', adminControllers.UpdateTopping);
+router.delete('/topping/:productId/:toppingId', adminControllers.deleteTopping);
+//router.get('/edit-product/:productId', adminControllers.getEditProduct);
+//router.get('/find-product/:productId', adminControllers.getFindProduct);
+//router.get('/toppings/:productId', adminControllers.getToppings);
+//router.get('/edit-topping/:toppingId', adminControllers.getEditTopping);
 
 module.exports = router;

@@ -2,7 +2,8 @@ const Product = require('../models/product')
 const Topping = require('../models/product-topping')
 const mongoose = require('mongoose');
 
-exports.postAddProduct = (req,res,next) => {
+//Product 
+exports.AddProduct = (req,res,next) => {
     const title = req.body.title;
     const price = req.body.price;
     const imgURl = req.body.imgUrl;
@@ -25,20 +26,7 @@ exports.postAddProduct = (req,res,next) => {
     res.status(201).json(product);
 }
 
-exports.getEditProduct = async (req, res, next) => {
-    try {
-        const id = req.params.productId;
-        const product = await Product.findById(id);
-        if(!product){
-            return res.status(404).json({message: "Product not found!"});
-        }
-        res.status(200).json(product);
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-exports.postEditProduct = async (req, res, next) => {
+exports.UpdateProduct = async (req, res, next) => {
     try {
         const updatedTitle = req.body.title;
         const updatedPrice = req.body.price;
@@ -62,21 +50,18 @@ exports.postEditProduct = async (req, res, next) => {
     }
 }
 
-exports.getFindProduct = async (req, res, next) => {
+exports.deleteProduct = async (req, res, next) => {
     try {
-        const id = req.params.productId;
-        Product.findById(id)
-        .then(product => {
-            
-            res.status(200).json(product);
-        })
-        .catch(err => console.log(err));
+        const productId = req.params.productId
+        const product = await Product.findByIdAndDelete(productId)
+        res.status(200).json(product);
     } catch (error) {
-        
+        console.log(error);
     }
 }
+//Topping
 
-exports.postAddTopping = async (req, res, next) => {
+exports.AddTopping = async (req, res, next) => {
     try {
         const productId = req.params.productId;
         const title = req.body.title;
@@ -100,31 +85,7 @@ exports.postAddTopping = async (req, res, next) => {
     }
 }
 
-exports.getToppings = async (req, res, next) => {
-    try {
-        const productId = req.params.productId;
-        const product = await Product.findById(productId).populate({
-            path: 'toppings.items.toppingId',
-            select: 'title price'
-        });
-
-        res.status(200).json(product);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-exports.getEditTopping = async (req, res, next) => {
-    try {
-        const toppingId = req.params.toppingId;
-        const topping = await Topping.findById(toppingId);
-        res.status(200).json(topping);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-exports.postEditTopping = (req, res, next) => {
+exports.UpdateTopping = (req, res, next) => {
     try {
         const toppingId = req.params.toppingId
         const title = req.body.title;
@@ -164,14 +125,5 @@ exports.deleteTopping = async (req, res, next) => {
 
     } catch (error) {
         console.log(error => console.log(error))
-    }
-}
-exports.deleteProduct = async (req, res, next) => {
-    try {
-        const productId = req.params.productId
-        const product = await Product.findByIdAndDelete(productId)
-        res.status(200).json(product);
-    } catch (error) {
-        console.log(error);
     }
 }
