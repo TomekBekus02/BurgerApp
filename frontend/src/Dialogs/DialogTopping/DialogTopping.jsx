@@ -4,15 +4,15 @@ import axios from "axios";
 
 import "./dialogTopping.css"
 import "../../styles/utilStyles.css"
+import { deleteTopping } from "../../services/api";
 
 export default function DialogTopping({ref, toppingId}){
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const {productId} = useParams();
-    const deleteTopping = useMutation({
-        mutationFn: () => {
-            return axios.delete(`http://localhost:3000/admin/delete-topping/${productId}/${toppingId}`)
-        },
+    
+    const deleteTopp = useMutation({
+        mutationFn: () => deleteTopping(productId, toppingId),
         onSuccess: () => {
             queryClient.invalidateQueries(["Products"]);
             queryClient.invalidateQueries(["Toppings"]);
@@ -28,7 +28,7 @@ export default function DialogTopping({ref, toppingId}){
             >Modify</button>
             <button 
                 className="btn delete-button"
-                onClick={()=>{deleteTopping.mutate({toppingId})}}
+                onClick={()=>{deleteTopp.mutate({toppingId})}}
             >Delete</button>
             <form method="dialog" className="dialog-button">
                 <button>X</button>

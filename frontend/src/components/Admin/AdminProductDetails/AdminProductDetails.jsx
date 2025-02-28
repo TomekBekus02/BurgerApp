@@ -1,16 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
+
 import './AdminProductDetails.css'
 import AdminTopping from "../AdminTopping/AdminTopping";
+import { fetchToppings } from "../../../services/api";
 
 export default function AdminProductDetails({id, imgURL, title, price}){
     const navigate = useNavigate();
     const { productId } = useParams();
-    const fetchToppings = async (productId) => {
-        const { data } = await axios.get(`http://localhost:3000/admin/get-toppings/${productId}`);
-        return data;
-    }
+
     const {data, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Toppings", productId], 
         queryFn: () => fetchToppings(productId),

@@ -4,15 +4,14 @@ import axios from "axios";
 
 import "../AddProduct/AddProduct.css"
 import "../../../styles/utilStyles.css"
+import { addTopping } from "../../../services/api";
 
 export default function AddTopping(){
     const { productId } = useParams();
     const navigate = useNavigate();
 
-    const addTopping = useMutation({
-        mutationFn: (newTopping) => {
-            return axios.post(`http://localhost:3000/admin/add-topping/${productId}`, newTopping);
-        },
+    const addTopp = useMutation({
+        mutationFn: ({ newTopping, productId }) => addTopping(newTopping, productId),
         onSuccess: () => {
             navigate(`/admin/modify-topping/${productId}`);
         }
@@ -23,7 +22,7 @@ export default function AddTopping(){
         const title = formData.get('title');
         const price = formData.get('price');
 
-        addTopping.mutate({title, price});
+        addTopp.mutate({newTopping: {title, price}, productId});
     }
     return(
         

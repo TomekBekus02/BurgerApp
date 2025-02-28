@@ -6,7 +6,7 @@ import Home from '../../pages/User/Home/Home'
 import AdminHome from '../../pages/Admin/AdminHome/AdminHome'
 import EditProduct from '../../pages/Admin/EditProduct/EditProduct'
 import ModifyProductToppings from '../../pages/Admin/ModifyProductToppings/ModifyProductToppings'
-import EditTopping from '../../pages/Admin/EditProduct/EditProduct'
+import EditTopping from '../../pages/Admin/EditTopping/EditTopping'
 
 export const router = createBrowserRouter([
     {
@@ -23,9 +23,9 @@ export const router = createBrowserRouter([
         {path: 'admin-home', element: <AdminHome />},
         {path: 'add-product', element: <AddProduct/>},
         {path: 'add-topping/:productId', element: <AddTopping/>},
+        {path: 'edit-topping/:productId/:toppingId', element: <EditTopping/>},
         {path: 'edit-product/:productId', element: <EditProduct/>},
         {path: 'modify-topping/:productId', element: <ModifyProductToppings/>},
-        {path: 'edit-topping/:productId/:toppingId', element: <EditTopping/>},
       ]
     }
-  ])
+])

@@ -107,8 +107,7 @@ exports.getToppings = async (req, res, next) => {
             path: 'toppings.items.toppingId',
             select: 'title price'
         });
-        console.log("wypisz ");
-        console.log(JSON.stringify(product, null, 2));
+
         res.status(200).json(product);
     } catch (error) {
         console.log(error);

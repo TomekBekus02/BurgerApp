@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 
 import AdminProductDetails from "../../../components/Admin/AdminProductDetails/AdminProductDetails"
-import { fetchProductsById } from "../../../services/api"
+import { fetchProductById } from "../../../services/api"
 
 export default function ModifyProductToppings(){
 
     const { productId } = useParams();
     const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products", productId], 
-        queryFn: () => fetchProductsById(productId),
+        queryFn: () => fetchProductById(productId),
     })
     return (
         <div>

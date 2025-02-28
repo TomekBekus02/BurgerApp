@@ -4,13 +4,12 @@ import "../../styles/utilStyles.css"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import './dialogProduct.css'
+import { deleteProduct } from "../../services/api";
 
 export default function DialogProduct({ref, productId}){
     const queryClient = useQueryClient();
-    const deleteProduct = useMutation({
-        mutationFn: async (id) => {
-            return await axios.delete(`http://localhost:3000/admin/delete-product/${productId}`)
-        },
+    const deleteProd = useMutation({
+        mutationFn: () => deleteProduct(productId),
         onSuccess: () => {
             queryClient.invalidateQueries("Products");
         }
@@ -21,7 +20,7 @@ export default function DialogProduct({ref, productId}){
             <div className="button-container">
                 <button 
                     className="btn delete-button"
-                    onClick={()=>deleteProduct.mutate()}
+                    onClick={()=>deleteProd.mutate()}
                 >Yes</button>
                 <form method="dialog">
                     <button className="btn green-button">No</button>

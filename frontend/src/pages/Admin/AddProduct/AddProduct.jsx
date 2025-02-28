@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import axios from "axios"
 import "./AddProduct.css"
 import "../../../styles/utilStyles.css"
+import { addProduct } from "../../../services/api"
 
 export default function AddProduct(){
-    const navigate = useNavigate()
-    const queryClient = useQueryClient()
-    const addProduct = useMutation({
-        mutationFn: (newOrder) => axios.post("http://localhost:3000/admin/add-product", newOrder),
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
+    const addProd = useMutation({
+        mutationFn: (newOrder) => addProduct(newOrder),
         onSuccess: () => {
             queryClient.invalidateQueries(["Products"])
             navigate("/")
@@ -25,7 +25,7 @@ export default function AddProduct(){
         const description = formData.get('description');
         const imgUrl = formData.get('imgUrl');
 
-        addProduct.mutate({title, price, imgUrl, description})
+        addProd.mutate({title, price, imgUrl, description})
     }
 
     return (

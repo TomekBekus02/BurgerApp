@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
+import { fetchToppingById, updateTopping } from "../../../services/api";
 
 export default function EditTopping(){
     const { toppingId, productId } = useParams();
@@ -8,30 +9,29 @@ export default function EditTopping(){
     const queryClient = useQueryClient();
 
     const editTopping = useMutation({
-        mutationFn: async (editedTopping) => {
-            return await axios.post(`http://localhost:3000/admin/edit-topping/${toppingId}`, editedTopping)
-        },
+        mutationFn: ({editedTopping, toppingId}) => updateTopping(editedTopping, toppingId),
         onSuccess: () => {
             queryClient.invalidateQueries(["Toppings"]);
             queryClient.invalidateQueries(["Products"]);
             navigate(`/admin/modify-topping/${productId}`);
         }
     })
-    const FetchData = async (toppingId) => {
-        const { data } = await axios.get(`http://localhost:3000/admin/edit-topping/${toppingId}`)
-        return data
-    }
+
+    const {data: topping, isLoading, isFetching, isError} = useQuery({
+        queryKey: ["Toppings", toppingId], 
+        queryFn: ({ queryKey }) => {
+            const [, toppingId] = queryKey;
+            return fetchToppingById(toppingId);
+        }
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const title = formData.get('title');
         const price = formData.get('price');
-        editTopping.mutate({title, price});
+        editTopping.mutate({editedTopping: {title, price}, toppingId});
     }
-    const {data: topping, isLoading, isFetching, isError} = useQuery({
-        queryKey: ["Toppings"], 
-        queryFn: () => FetchData(toppingId)
-    })
     return (
         <div className="container">
             <div className="add-product-container">

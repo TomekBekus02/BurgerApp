@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios"
 
-import { fetchProductsById } from "../../../services/api";
+import { fetchProductById, updateProduct } from "../../../services/api";
 
 export default function EditProduct(){
     const navigate = useNavigate();
@@ -10,9 +10,7 @@ export default function EditProduct(){
     const { productId } = useParams();
 
     const editProduct = useMutation({
-        mutationFn: (editedProduct) => {
-            return axios.post(`http://localhost:3000/admin/edit-product/${productId}`, editedProduct)
-        },
+        mutationFn: ({editedProduct, productId}) => updateProduct(editedProduct, productId),
         onSuccess: () => {
             queryClient.invalidateQueries(["Products"]);
             navigate('/admin/admin-home');
@@ -21,7 +19,7 @@ export default function EditProduct(){
 
     const {data: product, isLoading, isFetching, isError} = useQuery({
         queryKey: ["Products", productId], 
-        queryFn: () => fetchProductsById(productId)
+        queryFn: () => fetchProductById(productId)
     })
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,7 +29,7 @@ export default function EditProduct(){
         const price = formData.get('price');
         const description = formData.get('description');
         const imgUrl = formData.get('imgUrl');
-        editProduct.mutate({title, price, imgUrl, description});
+        editProduct.mutate({editedProduct: {title, price, imgUrl, description}, productId});
     }
     return (
         <div className="container">
