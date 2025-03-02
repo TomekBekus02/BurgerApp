@@ -23,13 +23,14 @@ export default function EditProduct(){
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const formData = new FormData(e.target);
-        const title = formData.get('title');
-        const price = formData.get('price');
-        const description = formData.get('description');
-        const imgUrl = formData.get('imgUrl');
-        editProduct.mutate({editedProduct: {title, price, imgUrl, description}, productId});
+        const editedProduct = {
+            title: formData.get('title'),
+            price: formData.get('price'),
+            description: formData.get('description'),
+            imgUrl: formData.get('imgUrl')
+        }
+        editProduct.mutate({editedProduct, productId});
     }
     return (
         <div className="container">

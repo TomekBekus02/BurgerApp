@@ -4,10 +4,7 @@ const Product = require('../models/product');
 exports.getProductToppings = async (req, res, next) => {
     try {
         const productId = req.params.productId;
-        const productToppings = await Product.findById(productId).populate({
-            path: 'toppings.items.toppingId',
-            select: 'title price'
-        });
+        const productToppings = await Product.findById(productId);
         res.status(200).json(productToppings);
     } catch (error) {
         console.log(error);

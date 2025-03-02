@@ -11,8 +11,8 @@ export default function EditTopping(){
     const editTopping = useMutation({
         mutationFn: ({editedTopping, toppingId}) => updateTopping(editedTopping, toppingId),
         onSuccess: () => {
-            queryClient.invalidateQueries(["Toppings"]);
-            queryClient.invalidateQueries(["Products"]);
+            queryClient.invalidateQueries(["Toppings", toppingId]);
+            queryClient.invalidateQueries(["Products", productId]);
             navigate(`/admin/modify-topping/${productId}`);
         }
     })

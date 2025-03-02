@@ -23,18 +23,20 @@ const productSchema = new Schema({
         items: [
             {
                 toppingId: {type: Schema.Types.ObjectId, ref: "Topping", required: true},
-                isAdded: {type: Boolean, require: true}
+                title: {type: String, required: true},
+                price: {type: Number, required: true}
             }
-
         ]
     }
 })
 
 productSchema.methods.addToppingToProduct = function(topping) {
     const updatedToppingsItems = [...this.toppings.items];
+    console.log( "in module: " + topping)
     updatedToppingsItems.push({ 
         toppingId: topping._id, 
-        isAdded: false 
+        title: topping.title,
+        price: topping.price 
     });
     const updatedProductToppings = {
         items: updatedToppingsItems

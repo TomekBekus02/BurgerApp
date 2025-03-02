@@ -33,9 +33,9 @@ export default function AdminProductDetails({id, imgURL, title, price}){
                                     data.toppings.items.map((topping) => {
                                         return (
                                             <AdminTopping 
-                                                price={topping.toppingId.price} 
-                                                title={topping.toppingId.title}
-                                                id={topping.toppingId._id}
+                                                price={topping.price} 
+                                                title={topping.title}
+                                                id={topping.toppingId}
                                             />
                                         )
                                     })

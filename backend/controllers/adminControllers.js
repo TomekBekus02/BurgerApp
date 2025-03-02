@@ -28,20 +28,14 @@ exports.AddProduct = (req,res,next) => {
 
 exports.UpdateProduct = async (req, res, next) => {
     try {
-        const updatedTitle = req.body.title;
-        const updatedPrice = req.body.price;
-        const updatedImgUrl = req.body.imgUrl;
-        const updatedDescription = req.body.description;
-        const id = req.params.productId;
-        Product.findById(id)
-        .then(product => {
-            product.title = updatedTitle;
-            product.price = updatedPrice;
-            product.imgUrl = updatedImgUrl;
-            product.description = updatedDescription;
-            return product.save();
-        }).then(product => {
-            res.status(200).json(product);
+        const productId = req.params.productId;
+        const updatedData = req.body;
+        Product.findByIdAndUpdate(productId, updatedData, {new: true})
+        .then(updatedProduct => {
+            if(!updatedProduct){
+                return res.status(404).json({message: "Product not found"});
+            }
+            return res.status(200).json(updatedProduct);
         })
         .catch(err => console.log(err));
 
@@ -66,17 +60,13 @@ exports.AddTopping = async (req, res, next) => {
         const productId = req.params.productId;
         const title = req.body.title;
         const price = req.body.price;
-        if (!mongoose.Types.ObjectId.isValid(productId)) {
-            console.log("bledny type " + productId);
-            return res.status(400).json({ error: 'Nieprawidłowy productId' });
-        }
         const topping = new Topping({
             title:title,
             price:price,
             productId:productId
         })
         const AddedTopping = await topping.save()
-        console.log("topping added");
+
         const product = await Product.findById(productId);
         await product.addToppingToProduct(AddedTopping);
         res.status(200).json(AddedTopping);
@@ -85,30 +75,53 @@ exports.AddTopping = async (req, res, next) => {
     }
 }
 
-exports.UpdateTopping = (req, res, next) => {
+exports.UpdateTopping = async (req, res, next) => {
+
+    const session = await mongoose.startSession();
+    session.startTransaction();  
+
     try {
-        const toppingId = req.params.toppingId
-        const title = req.body.title;
-        const price = req.body.price;
-        if (!mongoose.Types.ObjectId.isValid(toppingId)) {
-            console.log("bledny type " + toppingId);
-            return res.status(400).json({ error: 'Nieprawidłowy productId' });
+        const toppingId = req.params.toppingId;
+        const { title, price } = req.body;
+
+        const topping = await Topping.findById(toppingId);
+        if (!topping) {
+            return res.status(404).json({ message: 'Topping not found' });
         }
-        Topping.findById(toppingId)
-            .then(topping => {
-                topping.title = title;
-                topping.price = price;
-                return topping.save()
+
+        topping.title = title;
+        topping.price = price;
+        await topping.save();
+
+        const products = await Product.find({ "toppings.items.toppingId": toppingId });
+
+        await Promise.all(
+            products.map(async (product) => {
+                const updatedToppings = product.toppings.items.map((topping) => {
+                    if (topping.toppingId.toString() === toppingId) {
+                        return {
+                            ...topping,
+                            title: topping.title === title ? topping.title : title,
+                            price: topping.price === price ? topping.price : price
+                        };
+                    }
+                    return topping;
+                });
+
+                product.toppings.items = updatedToppings;
+                await product.save();
             })
-            .then(topping => {
-                console.log(topping);
-                res.status(200).json(topping);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        );
+
+        await session.commitTransaction();
+        session.endSession();
+
+        res.status(200).json({ message: 'Topping updated successfully' });
     } catch (error) {
-        console.log(error);
+        await session.abortTransaction(); 
+        session.endSession();
+        console.error(error);
+        res.status(500).json({ message: 'Error updating topping' });
     }
 }
 

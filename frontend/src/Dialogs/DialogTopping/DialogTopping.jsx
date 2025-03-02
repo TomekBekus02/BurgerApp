@@ -12,10 +12,10 @@ export default function DialogTopping({ref, toppingId}){
     const {productId} = useParams();
     
     const deleteTopp = useMutation({
-        mutationFn: () => deleteTopping(productId, toppingId),
+        mutationFn: ({productId, toppingId}) => deleteTopping(productId, toppingId),
         onSuccess: () => {
-            queryClient.invalidateQueries(["Products"]);
-            queryClient.invalidateQueries(["Toppings"]);
+            queryClient.invalidateQueries(["Products", productId]);
+            queryClient.invalidateQueries(["Toppings", toppingId]);
             navigate(`/admin/modify-topping/${productId}`)
         }
     })
@@ -24,11 +24,11 @@ export default function DialogTopping({ref, toppingId}){
             <h1>What do you want to do?</h1>
             <button 
                 className="btn modify-button"
-                onClick={() => {navigate(`/admin/edit-topping/${productId}/${toppingId}`)}}
+                onClick={() => navigate(`/admin/edit-topping/${productId}/${toppingId}`)}
             >Modify</button>
             <button 
                 className="btn delete-button"
-                onClick={()=>{deleteTopp.mutate({toppingId})}}
+                onClick={()=>{deleteTopp.mutate({productId, toppingId})}}
             >Delete</button>
             <form method="dialog" className="dialog-button">
                 <button>X</button>
