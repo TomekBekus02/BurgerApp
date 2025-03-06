@@ -56,3 +56,5 @@ export const postLogin = async (User) => {
 export const postSignIn = async (newUser) => {
     return await axios.post('http://localhost:3000/auth/signup', newUser);
 }
+
+export const deleteLogout = async () => await axios.delete('http://localhost:3000/auth/logout');

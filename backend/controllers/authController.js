@@ -5,6 +5,7 @@ exports.loginUser = (req, res, next) => {
     try {
         const email = req.body.userEmail;
         const password = req.body.userPassword;
+
         console.log("email " + email + " password " + password);
         User.findOne({email: email})
             .then(user => {
@@ -18,8 +19,21 @@ exports.loginUser = (req, res, next) => {
                         req.session.isLoggedIn = true;
                         req.session.user = user;
                         return req.session.save(err => {
-                            console.log("login in sucess");
-                            res.status(200).json({message: "Logged in sucessfuly"});
+                            if(email=="admin@admin.com"){
+                                console.log("login in sucess as Admin");
+                                res.status(200).json({
+                                    message: `Logged in sucessfuly as Admin`, 
+                                    role: 'Admin',
+                                    userName: 'Admin'
+                                });
+                            }else{
+                                console.log(`login in sucess as ${user.userName}`);
+                                res.status(200).json({
+                                    message: `Logged in sucessfuly as ${user.userName}`, 
+                                    role: 'User',
+                                    userName: user.userName
+                                });
+                            }
                         })
                     }
                     console.log("Wrong email or password");
@@ -58,7 +72,8 @@ exports.signupUser = async (req, res, next) => {
                         userName: userName,
                         email: email,
                         password: hashedPassword,
-                        cart: { item: [] }
+                        cart: { item: [] },
+                        role: "user"
                     })
                     return user.save();
                 })
