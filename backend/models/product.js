@@ -28,11 +28,11 @@ const productSchema = new Schema({
             }
         ]
     },
-    userId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
-    }
+    // userId: {
+    //     type: Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: 'User'
+    // }
 })
 
 productSchema.methods.addToppingToProduct = function(topping) {

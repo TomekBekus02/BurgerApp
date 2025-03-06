@@ -7,6 +7,8 @@ import AdminHome from '../../pages/Admin/AdminHome/AdminHome'
 import EditProduct from '../../pages/Admin/EditProduct/EditProduct'
 import ModifyProductToppings from '../../pages/Admin/ModifyProductToppings/ModifyProductToppings'
 import EditTopping from '../../pages/Admin/EditTopping/EditTopping'
+import Login from '../../pages/User/Login/Login'
+import SignUp from '../../pages/User/SignUp/SignUp'
 
 export const router = createBrowserRouter([
     {
@@ -14,6 +16,8 @@ export const router = createBrowserRouter([
       element: <RootLayout />,
       children: [
         {path: '', element: <Home />},
+        {path: '/login', element: <Login />},
+        {path: '/sign-up', element: <SignUp/>},
       ]
     },
     {

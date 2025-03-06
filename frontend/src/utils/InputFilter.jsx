@@ -1,3 +1,5 @@
+import './InputFilter.css'
+
 export default function InputFilter({setFilterProductInput}){
     const handleInputChange = (e) => {
         setFilterProductInput(e.target.value);

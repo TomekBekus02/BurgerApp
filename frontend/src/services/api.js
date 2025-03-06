@@ -46,3 +46,13 @@ export const updateTopping = async (editedTopping, toppingId) => {
 export const deleteTopping = async (productId, toppingId) => {
     return await axios.delete(`http://localhost:3000/admin/topping/${productId}/${toppingId}`);
 }
+
+//User
+
+export const postLogin = async (User) => {
+    return await axios.post('http://localhost:3000/auth/login', User);
+}
+
+export const postSignIn = async (newUser) => {
+    return await axios.post('http://localhost:3000/auth/signup', newUser);
+}
