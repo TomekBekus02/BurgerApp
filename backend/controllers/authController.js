@@ -88,6 +88,7 @@ exports.signupUser = async (req, res, next) => {
 exports.logoutUser = (req, res, next) => {
     try {
         req.session.destroy(err => {
+            console.log("sesja usunieta: a o to ona " + req.session)
             console.log(err);
             res.status(200).json({message: "succesfuly logout"});
         })

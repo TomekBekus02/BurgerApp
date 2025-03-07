@@ -41,10 +41,13 @@ export default function NavBar(){
                                         <li><a class="dropdown-item">Change Password</a></li>
                                         <li><a class="dropdown-item">Change email</a></li>
                                         <li><hr class="dropdown-divider"/></li>
-                                        <li><button 
-                                            class="dropdown-item" 
-                                            onClick={() => deleteSession.mutate({})}
-                                        >Log Out</button></li>
+                                        <li>
+                                            <button 
+                                                class="dropdown-item" 
+                                                onClick={() => deleteSession.mutate({})}
+                                            >Log Out
+                                            </button>
+                                        </li>
                                     </ul>
                                 </li>
                             :

@@ -19,7 +19,8 @@ const MONGODB_URI = process.env.DATABASE_URI;
 const secret = crypto.randomBytes(64).toString('hex');
 const store = new MongodbStore({
     uri: MONGODB_URI,
-    collection: 'sessions'
+    collection: 'sessions',
+    autoRemove: 'interval'
 })
 
 app.use(express.json());
