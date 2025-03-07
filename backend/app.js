@@ -13,6 +13,7 @@ const productRoutes = require('./routes/products');
 const toppingRoutes = require('./routes/topping');
 const authRoutes = require('./routes/auth');
 const User = require('./models/user');
+const { verifyToken } = require('./controllers/verifyToken');
 
 const MONGODB_URI = process.env.DATABASE_URI;
 const secret = crypto.randomBytes(64).toString('hex');
@@ -46,6 +47,7 @@ app.use('/auth', authRoutes);
 app.use(productRoutes);
 app.use(toppingRoutes);
 //app.use(restaurantRoutes);
+app.use(verifyToken);
 app.use('/admin', adminRoutes);
 
 mongoose

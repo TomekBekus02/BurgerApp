@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import RootLayout from './RootLayout'
+import AdminRootLayout from '../AdminRootLayout/AdminRootLayout'
 import AddProduct from '../../pages/Admin/AddProduct/AddProduct'
 import AddTopping from '../../pages/Admin/AddTopping/AddToppings'
 import Home from '../../pages/User/Home/Home'
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
     },
     {
       path: '/admin',
-      element: <RootLayout />,
+      element: <AdminRootLayout />,
       children: [
         {path: 'admin-home', element: <AdminHome />},
         {path: 'add-product', element: <AddProduct/>},

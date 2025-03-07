@@ -6,21 +6,15 @@ import { postLogin } from "../../../services/api";
 import { useAuth } from "../../../Contexts/AuthContext";
 
 export default function Login() {
-    const {AdminLogin, UserLogin} = useAuth();
+    const { login, logout } = useAuth();
     const [ifShowPassword, setIfShowPassword] = useState(false);
     const navigate = useNavigate();
     
     const loginUser = useMutation({
         mutationFn: (newUser) => postLogin(newUser),
-        onSuccess: (data) => {
-            sessionStorage.setItem("isLogged", "true");
-            sessionStorage.setItem("userName", `${data.data.userName}`);
-            if(data.data.role === 'Admin'){
-                sessionStorage.setItem("role", "Admin");
-                navigate('/admin/admin-home');
-            }else if(data.data.role === 'User'){
-                navigate('/');
-            }
+        onSuccess: (token) => {
+            login(token);
+            navigate('/');
         }
     })
     const handleSubmit = (e) => {

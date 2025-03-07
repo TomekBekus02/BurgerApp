@@ -1,24 +1,21 @@
 import { Link, useNavigate } from "react-router-dom"
 import './NavBar.css'
-import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { deleteLogout } from "../../services/api";
+import { useAuth } from "../../Contexts/AuthContext";
 
 
 export default function NavBar(){
     const navigate = useNavigate();
+    const {logout, user} = useAuth();
     const deleteSession = useMutation({
         mutationFn: deleteLogout,
         onSuccess: () => {
-            sessionStorage.removeItem("isLogged");
-            sessionStorage.removeItem("role");
-            sessionStorage.removeItem("userName");
+            logout();
             navigate('/login');
         }
     })
-    const isLogged = sessionStorage.getItem("isLogged");
-    const currentRole = sessionStorage.getItem("role");
-    const userName = sessionStorage.getItem("userName");
+    
     return (
         <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary position-fixed w-100">
             <div class="container-fluid">
@@ -28,7 +25,7 @@ export default function NavBar(){
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         {
-                            isLogged == "true" 
+                            user 
                             ?                        
                                 <li class="nav-item dropdown">
                                     <a 
@@ -38,7 +35,7 @@ export default function NavBar(){
                                         data-bs-toggle="dropdown" 
                                         aria-expanded="false"
                                     >
-                                        {userName}
+                                        {user.userName}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item">Change Password</a></li>
@@ -67,7 +64,7 @@ export default function NavBar(){
                             <Link to="#" class="nav-link">Your Cart</Link>
                         </li>
                         {
-                            currentRole==='Admin' && (
+                            user && user.role==='admin' && (
                                 <>
                                     <li class="nav-item">
                                         <Link to="/admin/admin-home" class="nav-link">Admin Home</Link>
@@ -82,26 +79,5 @@ export default function NavBar(){
                 </div>
             </div>
         </nav>
-        // <div>
-        //     <nav>
-        //         <ul>
-        //             <li>
-        //                 <Link to="/">Home</Link>
-        //             </li>
-        //             <li>
-        //                 <Link to="#">Your Order</Link>
-        //             </li>
-        //             <li>
-        //                 <Link to="#">Your Cart</Link>
-        //             </li>
-        //             <li>
-        //                 <Link to="/admin/admin-home">Admin Home</Link>
-        //             </li>
-        //             <li>
-        //                 <Link to="/admin/add-product">Add product</Link>
-        //             </li>
-        //         </ul>
-        //     </nav>
-        // </div>
     )
 }

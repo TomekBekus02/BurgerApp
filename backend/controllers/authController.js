@@ -1,5 +1,9 @@
+require('dotenv').config();
 const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
+
 
 exports.loginUser = (req, res, next) => {
     try {
@@ -19,21 +23,14 @@ exports.loginUser = (req, res, next) => {
                         req.session.isLoggedIn = true;
                         req.session.user = user;
                         return req.session.save(err => {
-                            if(email=="admin@admin.com"){
-                                console.log("login in sucess as Admin");
-                                res.status(200).json({
-                                    message: `Logged in sucessfuly as Admin`, 
-                                    role: 'Admin',
-                                    userName: 'Admin'
-                                });
-                            }else{
-                                console.log(`login in sucess as ${user.userName}`);
-                                res.status(200).json({
-                                    message: `Logged in sucessfuly as ${user.userName}`, 
-                                    role: 'User',
-                                    userName: user.userName
-                                });
-                            }
+                            const SECRET_KEY = process.env.JWT_SECRET;
+                            const token = jwt.sign(
+                                { userName: user.userName, role: user.role }, 
+                                SECRET_KEY,
+                                { expiresIn: '1h' }
+                              );
+                            res.json({ token })
+
                         })
                     }
                     console.log("Wrong email or password");

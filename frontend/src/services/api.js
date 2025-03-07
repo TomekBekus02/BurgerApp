@@ -12,15 +12,30 @@ export const fetchProductById = async (productId) => {
 }
 
 export const addProduct = async (newOrder) => {
-    return await axios.post("http://localhost:3000/admin/product", newOrder);
+    const token = sessionStorage.getItem("token");
+    return await axios.post("http://localhost:3000/admin/product", newOrder, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 export const updateProduct = async (editedProduct, productId) => {
-    return await axios.put(`http://localhost:3000/admin/product/${productId}`, editedProduct);
+    const token = sessionStorage.getItem("token");
+    return await axios.put(`http://localhost:3000/admin/product/${productId}`, editedProduct, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 export const deleteProduct = async (productId) => {
-    return await axios.delete(`http://localhost:3000/admin/product/${productId}`);
+    const token = sessionStorage.getItem("token");
+    return await axios.delete(`http://localhost:3000/admin/product/${productId}`, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 //Topping
@@ -36,21 +51,37 @@ export const fetchToppingById = async (toppingId) => {
 }
 
 export const addTopping = async (newTopping, productId) => {
-    return await axios.post(`http://localhost:3000/admin/topping/${productId}`, newTopping);
+    const token = sessionStorage.getItem("token");
+    return await axios.post(`http://localhost:3000/admin/topping/${productId}`, newTopping, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 export const updateTopping = async (editedTopping, toppingId) => {
-    return await axios.put(`http://localhost:3000/admin/topping/${toppingId}`, editedTopping);
+    const token = sessionStorage.getItem("token");
+    return await axios.put(`http://localhost:3000/admin/topping/${toppingId}`, editedTopping, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 export const deleteTopping = async (productId, toppingId) => {
-    return await axios.delete(`http://localhost:3000/admin/topping/${productId}/${toppingId}`);
+    const token = sessionStorage.getItem("token");
+    return await axios.delete(`http://localhost:3000/admin/topping/${productId}/${toppingId}`, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    });
 }
 
 //User
 
 export const postLogin = async (User) => {
-    return await axios.post('http://localhost:3000/auth/login', User);
+    const response = await axios.post('http://localhost:3000/auth/login', User);
+    return response.data.token;
 }
 
 export const postSignIn = async (newUser) => {
