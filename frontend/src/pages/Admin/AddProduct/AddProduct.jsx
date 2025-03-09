@@ -4,7 +4,7 @@ import "./AddProduct.css"
 import "../../../styles/utilStyles.css"
 import { addProduct } from "../../../services/api"
 
-export default function AddProduct(){
+export default function AddProduct() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -25,7 +25,7 @@ export default function AddProduct(){
         const description = formData.get('description');
         const imgUrl = formData.get('imgUrl');
 
-        addProd.mutate({title, price, imgUrl, description})
+        addProd.mutate({ title, price, imgUrl, description })
     }
 
     return (
@@ -34,10 +34,10 @@ export default function AddProduct(){
                 <h1>Add product</h1>
                 <form onSubmit={handleSubmit}>
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required/>
+                    <input type="text" id="title" name="title" required />
 
                     <label for="price">Price:</label>
-                    <input type="text" id="price" name="price" required/>
+                    <input type="text" id="price" name="price" required />
 
                     <label for="imgUrl">img URL:</label>
                     <input type="text" id="imgUrl" name="imgUrl" />
@@ -49,8 +49,8 @@ export default function AddProduct(){
                 </form>
             </div>
         </div>
-        
 
-        
+
+
     )
 }

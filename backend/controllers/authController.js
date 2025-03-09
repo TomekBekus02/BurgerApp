@@ -10,7 +10,6 @@ exports.loginUser = (req, res, next) => {
         const email = req.body.userEmail;
         const password = req.body.userPassword;
 
-        console.log("email " + email + " password " + password);
         User.findOne({email: email})
             .then(user => {
                 if(!user){
@@ -25,7 +24,7 @@ exports.loginUser = (req, res, next) => {
                         return req.session.save(err => {
                             const SECRET_KEY = process.env.JWT_SECRET;
                             const token = jwt.sign(
-                                { userName: user.userName, role: user.role }, 
+                                { userName: user.userName, role: user.role, userId: user._id }, 
                                 SECRET_KEY,
                                 { expiresIn: '1h' }
                               );
@@ -53,7 +52,6 @@ exports.signupUser = async (req, res, next) => {
     const email = req.body.userEmail;
     const password = req.body.userPassword;
     
-    console.log("email " + email + " password " + password);
     try {
         User.findOne({email: email})
         .then(userDoc => {
@@ -88,7 +86,6 @@ exports.signupUser = async (req, res, next) => {
 exports.logoutUser = (req, res, next) => {
     try {
         req.session.destroy(err => {
-            console.log("sesja usunieta: a o to ona " + req.session)
             console.log(err);
             res.status(200).json({message: "succesfuly logout"});
         })

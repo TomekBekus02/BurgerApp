@@ -14,7 +14,6 @@ exports.AddProduct = (req,res,next) => {
         price: price,
         imgUrl: imgURl,
         description: description,
-        userId: req.user
     });
     product
         .save()
@@ -65,7 +64,6 @@ exports.AddTopping = async (req, res, next) => {
             title:title,
             price:price,
             productId:productId,
-            userId: req.user,
         })
         const AddedTopping = await topping.save()
 

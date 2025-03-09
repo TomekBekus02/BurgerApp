@@ -29,6 +29,10 @@ const userSchema = new Schema({
                 quantity: {
                     type: Number, 
                     required: true
+                },
+                itemCartPrice: {
+                    type: Number,
+                    require: true
                 }
             }
         ]
