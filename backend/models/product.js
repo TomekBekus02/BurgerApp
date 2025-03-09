@@ -32,7 +32,6 @@ const productSchema = new Schema({
 
 productSchema.methods.addToppingToProduct = function(topping) {
     const updatedToppingsItems = [...this.toppings.items];
-    console.log( "in module: " + topping)
     updatedToppingsItems.push({ 
         toppingId: topping._id, 
         title: topping.title,

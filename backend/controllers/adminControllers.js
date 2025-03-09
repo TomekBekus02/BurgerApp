@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-const Topping = require('../models/product-topping')
+const Topping = require('../models/topping')
 const mongoose = require('mongoose');
 
 //Product 

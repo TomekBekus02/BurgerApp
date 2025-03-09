@@ -21,7 +21,7 @@ export default function Home() {
     const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
 
     return (
-        <div class="position">
+        <div>
             <ButtonCart />
             <OffCanvaCart />
             <InputFilter setFilterProductInput={setFilterProductInput} />

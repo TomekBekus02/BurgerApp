@@ -39,7 +39,7 @@ export default function product({ id, imgURL, title, price, description, topping
                     }
 
                     <AddProductModal
-                        id={id}
+                        productId={id}
                         imgURL={imgURL}
                         title={title}
                         price={price}

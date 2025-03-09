@@ -89,3 +89,7 @@ export const postSignIn = async (newUser) => {
 }
 
 export const deleteLogout = async () => await axios.delete('http://localhost:3000/auth/logout');
+
+export const addProductToCart = async (addedProduct) => {
+    return await axios.post('http://localhost:3000/addProductToCart', addedProduct);
+}

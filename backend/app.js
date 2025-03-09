@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const session = require('express-session');
 const MongodbStore = require('connect-mongodb-session')(session)
 
-//const restaurantRoutes = require('./routes/restaurant');
+const restaurantRoutes = require('./routes/restaurant');
 const adminRoutes = require('./routes/admin');
 const productRoutes = require('./routes/products');
 const toppingRoutes = require('./routes/topping');
@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes);
 app.use(productRoutes);
 app.use(toppingRoutes);
-//app.use(restaurantRoutes);
+app.use(restaurantRoutes);
 app.use(verifyToken);
 app.use('/admin', adminRoutes);
 

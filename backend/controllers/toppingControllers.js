@@ -1,4 +1,4 @@
-const Topping = require('../models/product-topping');
+const Topping = require('../models/topping');
 const Product = require('../models/product');
 
 exports.getProductToppings = async (req, res, next) => {

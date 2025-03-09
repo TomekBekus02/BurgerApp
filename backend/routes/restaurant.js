@@ -3,6 +3,6 @@ const router = express.Router();
 
 const restaurantController = require('../controllers/restaurantControllers');
 
-router.get('/products', restaurantController.getProduct);
+router.post('/addProductToCart', restaurantController.addToCart);
 
 module.exports = router;
