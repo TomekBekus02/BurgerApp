@@ -7,6 +7,8 @@ import "../../../styles/Main.css"
 import InputFilter from "../../../utils/InputFilter"
 import { filteredProd } from "../../../Logic/filterProductsLogic"
 import { fetchProducts } from "../../../services/api"
+import ButtonCart from "../../../components/User/Cart/ButtonCart/ButtonCart"
+import OffCanvaCart from "../../../components/User/Cart/offCanvaCart/OffCanvaCart"
 
 export default function Home() {
 
@@ -19,7 +21,9 @@ export default function Home() {
     const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
 
     return (
-        <div>
+        <div class="position">
+            <ButtonCart />
+            <OffCanvaCart />
             <InputFilter setFilterProductInput={setFilterProductInput} />
             <div className="products">
                 {
