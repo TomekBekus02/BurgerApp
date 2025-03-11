@@ -19,6 +19,7 @@ exports.addToCart = async (req, res) => {
     for (item of updatedUser.cart.items){
         cartQuantity += item.quantity
     }
+    console.log("Uuid check: " + JSON.stringify(updatedUser.cart.items, null, 2));
     res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity});
 }
 

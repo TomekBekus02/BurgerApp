@@ -20,26 +20,20 @@ export default function Home() {
         queryFn: fetchProducts
     })
 
-    const { data: userCart, isLoading: userIsLoading, isFetching: userIsFetching, isError: userIsError } = useQuery({
-        queryKey: ["User"],
-        queryFn: () => fetchUserCart(user.userId)
-    })
+    // const { data: userCart, isLoading: userIsLoading, isFetching: userIsFetching, isError: userIsError } = useQuery({
+    //     queryKey: ["User"],
+    //     queryFn: () => fetchUserCart(user.userId)
+    // })
 
     const [filterProductInput, setFilterProductInput] = useState("");
     const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
 
     return (
         <div>
-            {
-                (userIsLoading || userIsFetching)
-                    ?
-                    null
-                    :
-                    <>
-                        <ButtonCart />
-                        <OffCanvaCart />
-                    </>
-            }
+
+            <ButtonCart />
+            <OffCanvaCart />
+
             <InputFilter setFilterProductInput={setFilterProductInput} />
             <div className="products">
                 {

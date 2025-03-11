@@ -16,9 +16,7 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
       return addProductToCart(addedProduct)
     },
     onSuccess: (data) => {
-      //console.log("Koszyk w onSuccess po pobraniu z backendu: " + JSON.stringify(data.cart, null, 2));
       updateCart(data.cart, data.cartQuantity);
-      //queryClient.invalidateQueries(["User"]);
     },
   })
 

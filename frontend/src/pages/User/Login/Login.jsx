@@ -15,7 +15,6 @@ export default function Login() {
     const loginUser = useMutation({
         mutationFn: (newUser) => postLogin(newUser),
         onSuccess: (data) => {
-            // sessionStorage.setItem("cartQuantity", "0");
             updateCart(data.cart.items, data.cartQuantity);
             login(data.token);
             navigate('/');

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { v4: uuidv4 } = require('uuid');
+
 
 const userSchema = new Schema({
     userName: {
@@ -21,6 +23,10 @@ const userSchema = new Schema({
     cart: {
         items: [
             {
+                cartProductId: {
+                    type: String,
+                    required: true
+                },
                 cartProduct: {
                     productId: {
                         type: mongoose.Types.ObjectId,
@@ -93,6 +99,7 @@ userSchema.methods.addProductToCart = async function(product){
         updatedItemsInCart[cartProductIndex].quantity = newQuantity;
     }else{
         updatedItemsInCart.push({
+            cartProductId: uuidv4(),
             cartProduct: {
                 productId,
                 title,

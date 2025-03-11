@@ -1,4 +1,8 @@
+import { useCart } from "../../../../Contexts/UserCartContext"
+import ProductCart from "../CartProduct/ProductCart";
+
 export default function OffCanvaCart() {
+    const { cart } = useCart();
     return (
         <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
@@ -16,7 +20,27 @@ export default function OffCanvaCart() {
                 ></button>
             </div>
             <div class="offcanvas-body">
-                <p>Try scrolling the rest of the page to see this option in action.</p>
+                {
+                    (cart && cart.length > 0)
+                        ?
+                        <div className="cartContainer w-100 d-flex flex-column">
+                            {
+                                cart.map(item => {
+                                    console.log(item);
+                                    return <ProductCart
+                                        key={item.cartProductId}
+                                        cartProductId={item.cartProductId}
+                                        quantity={item.quantity}
+                                        itemCartPrice={item.itemCartPrice}
+                                        cartProduct={item.cartProduct}
+                                    />
+                                })
+                            }
+                        </div>
+                        :
+                        <p>Your Cart is Empty</p>
+                }
+
             </div>
         </div>
     )
