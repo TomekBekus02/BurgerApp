@@ -35,7 +35,7 @@ export default function NavBar() {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        {user.userName}
+                                        <i class="fa-solid fa-user"></i> {user.userName}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item">Change Password</a></li>
@@ -62,9 +62,6 @@ export default function NavBar() {
                         </li>
                         <li class="nav-item">
                             <Link to="#" class="nav-link">Your Order</Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link to="#" class="nav-link">Your Cart</Link>
                         </li>
                         {
                             user && user.role === 'admin' && (

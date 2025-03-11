@@ -29,10 +29,12 @@ exports.loginUser = (req, res, next) => {
                                 { expiresIn: '1h' }
                             );
                             let cartQuantity = 0;
+                            let cartTotalPrice = 0;
                             for (item of user.cart.items){
                                 cartQuantity += item.quantity
+                                cartTotalPrice += item.itemCartPrice * item.quantity
                             }
-                            res.json({ token, cart: user.cart, cartQuantity })
+                            res.json({ token, cart: user.cart, cartQuantity, cartTotalPrice })
 
                         })
                     }

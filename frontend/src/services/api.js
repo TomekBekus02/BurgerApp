@@ -101,3 +101,9 @@ export const fetchUserCart = async (userId) => {
     //console.log("Nowy koszyk: " + JSON.stringify(data, null, 2));
     return data;
 }
+
+export const updatedQuantity = async (userId, cartProductId, operation) => {
+    const response = await axios.patch(`http://localhost:3000/userCart/${userId}/${cartProductId}?operation=${operation}`)
+    //console.log("jest jakies response: " + JSON.stringify(response.data, null, 2))
+    return response.data;
+}

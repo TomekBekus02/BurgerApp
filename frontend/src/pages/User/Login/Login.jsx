@@ -15,7 +15,7 @@ export default function Login() {
     const loginUser = useMutation({
         mutationFn: (newUser) => postLogin(newUser),
         onSuccess: (data) => {
-            updateCart(data.cart.items, data.cartQuantity);
+            updateCart(data.cart.items, data.cartQuantity, data.cartTotalPrice);
             login(data.token);
             navigate('/');
         }

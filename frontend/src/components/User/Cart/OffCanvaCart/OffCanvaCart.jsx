@@ -2,7 +2,7 @@ import { useCart } from "../../../../Contexts/UserCartContext"
 import ProductCart from "../CartProduct/ProductCart";
 
 export default function OffCanvaCart() {
-    const { cart } = useCart();
+    const { cart, cartTotalPrice } = useCart();
     return (
         <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
@@ -26,7 +26,6 @@ export default function OffCanvaCart() {
                         <div className="cartContainer w-100 d-flex flex-column">
                             {
                                 cart.map(item => {
-                                    console.log(item);
                                     return <ProductCart
                                         key={item.cartProductId}
                                         cartProductId={item.cartProductId}
@@ -36,6 +35,8 @@ export default function OffCanvaCart() {
                                     />
                                 })
                             }
+
+                            <h1>Total Price: {cartTotalPrice}zł</h1>
                         </div>
                         :
                         <p>Your Cart is Empty</p>

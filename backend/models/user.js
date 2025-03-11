@@ -122,4 +122,45 @@ userSchema.methods.addProductToCart = async function(product){
     return await this.save();
 }
 
+userSchema.methods.updatedCart = async function(operation, cartProductId) {
+    const updatedItemsInCart = [...this.cart.items];
+
+    const cartProductIndex = this.cart.items.findIndex(cp => {
+        return cp.cartProductId.toString() === cartProductId.toString();
+    })
+    if(operation == 'add'){
+        const newQuantity = this.cart.items[cartProductIndex].quantity + 1;
+        updatedItemsInCart[cartProductIndex].quantity = newQuantity;
+    }else if(operation == 'sub'){
+        const newQuantity = this.cart.items[cartProductIndex].quantity - 1;
+        if(newQuantity <= 0){
+            const updatedProduct = updatedItemsInCart.filter(cp => {
+                return cp.cartProductId.toString() !== cartProductId.toString();
+            })
+            const updatedCart = {
+                items: updatedProduct
+            }
+            this.cart = updatedCart;
+            return await this.save();
+
+        }else{
+            updatedItemsInCart[cartProductIndex].quantity = newQuantity;
+        }
+    }else if(operation == 'delete'){
+        const updatedProduct = updatedItemsInCart.filter(cp => {
+            return cp.cartProductId.toString() !== cartProductId.toString();
+        })
+        const updatedCart = {
+            items: updatedProduct
+        }
+        this.cart = updatedCart;
+        return await this.save();
+    }
+    const updatedCart = {
+        items: updatedItemsInCart
+    }
+    this.cart = updatedCart;
+    return await this.save();
+}
+
 module.exports = mongoose.model('User', userSchema);

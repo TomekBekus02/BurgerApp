@@ -5,46 +5,48 @@ const CartContex = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(() => {
         const userCart = sessionStorage.getItem("cart");
-        //console.log(userCart);
         if (!userCart || userCart === 'undefined' || userCart === '') {
-            return []; // Zwracamy pustą tablicę, jeśli nie ma poprawnych danych
+            return [];
         }
         try {
-            return JSON.parse(userCart); // Parsujemy tylko wtedy, gdy dane są poprawne
+            return JSON.parse(userCart);
         } catch (error) {
-            console.error("Błąd parsowania JSON:", error); // Możesz tutaj zapisać logi, jeśli coś pójdzie nie tak
-            return []; // Zwracamy pustą tablicę w razie błędu
+            console.error("Błąd parsowania JSON:", error);
+            return [];
         }
     });
     const [cartQuantity, setCartQuantity] = useState(() => {
         const userCartQuantity = sessionStorage.getItem("cartQuantity");
-        //console.log("pobranie cartAuantity: " + userCartQuantity);
         return userCartQuantity ? Number(userCartQuantity) : 0;
     })
-    const updateCart = (userCart, userCartQuantity) => {
+    const [cartTotalPrice, setCartTotalPrice] = useState(() => {
+        const userCartTotalPrice = sessionStorage.getItem("cartTotalPrice");
+        return userCartTotalPrice ? Number(userCartTotalPrice) : 0;
+    })
+    const updateCart = (userCart, userCartQuantity, cartTotalPrice) => {
         sessionStorage.setItem("cart", JSON.stringify(userCart));
         sessionStorage.setItem("cartQuantity", String(userCartQuantity));
-        //console.log("Koszyk w useContext po pobraniu z backendu: " + userCart)
-        console.log("Session: " + sessionStorage.getItem("cart"));
-        console.log("cart: " + JSON.stringify(cart, null, 2));
-        console.log("ja pierdole: " + JSON.stringify(userCart, null, 2));
+        sessionStorage.setItem("cartTotalPrice", String(cartTotalPrice));
         setCart(userCart);
         setCartQuantity(Number(userCartQuantity));
+        setCartTotalPrice(Number(cartTotalPrice));
     }
     const LoginSetCart = () => {
         setCart(() => {
             const userCart = sessionStorage.getItem("cart");
-            //console.log(userCart);
             return userCart ? JSON.parse(userCart) : [];
         });
         setCartQuantity(() => {
             const userCartQuantity = sessionStorage.getItem("cartQuantity");
-            //console.log("pobranie cartAuantity: " + userCartQuantity);
             return userCartQuantity ? Number(userCartQuantity) : 0;
+        });
+        setCartTotalPrice(() => {
+            const userCartTotalPrice = sessionStorage.getItem("cartTotalPrice");
+            return userCartTotalPrice ? Number(userCartTotalPrice) : 0;
         });
     }
     return (
-        <CartContex.Provider value={{ cart, cartQuantity, updateCart, LoginSetCart }}>
+        <CartContex.Provider value={{ cart, cartQuantity, cartTotalPrice, updateCart, LoginSetCart }}>
             {children}
         </CartContex.Provider>
     )

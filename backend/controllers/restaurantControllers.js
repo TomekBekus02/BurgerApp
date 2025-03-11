@@ -16,16 +16,36 @@ exports.addToCart = async (req, res) => {
 
     const updatedUser = await User.findById(userToken.userId);
     let cartQuantity = 0;
+    let cartTotalPrice = 0;
     for (item of updatedUser.cart.items){
         cartQuantity += item.quantity
+        cartTotalPrice += item.itemCartPrice * item.quantity
     }
-    console.log("Uuid check: " + JSON.stringify(updatedUser.cart.items, null, 2));
-    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity});
+    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice});
 }
 
 exports.getUserCart = async (req, res) => {
     const userId = req.params.userId;
     const user = await User.findById(userId);
     res.status(200).json(user.cart);
+}
+
+exports.updateCartQuantity = async (req, res) => {
+    const userId = req.params.userId;
+    const cartProductId = req.params.cartProductId;
+    const operation = req.query.operation;
+    const user = await User.findById(userId);
+
+    await user.updatedCart(operation, cartProductId);
+    const updatedUser = await User.findById(userId);
+
+    let cartQuantity = 0;
+    let cartTotalPrice = 0;
+    for (item of updatedUser.cart.items){
+        cartQuantity += item.quantity
+        cartTotalPrice += item.itemCartPrice * item.quantity
+    }
+    //console.log(cartTotalPrice);
+    res.status(200).json({messege: "succes updated cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice});
 }
 

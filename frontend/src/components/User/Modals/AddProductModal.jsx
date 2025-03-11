@@ -16,7 +16,7 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
       return addProductToCart(addedProduct)
     },
     onSuccess: (data) => {
-      updateCart(data.cart, data.cartQuantity);
+      updateCart(data.cart, data.cartQuantity, data.cartTotalPrice);
     },
   })
 
