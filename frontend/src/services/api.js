@@ -81,7 +81,8 @@ export const deleteTopping = async (productId, toppingId) => {
 
 export const postLogin = async (User) => {
     const response = await axios.post('http://localhost:3000/auth/login', User);
-    return response.data.token;
+    //console.log("In appis: " + JSON.stringify(response.data,null,2));
+    return response.data;
 }
 
 export const postSignIn = async (newUser) => {
@@ -91,7 +92,8 @@ export const postSignIn = async (newUser) => {
 export const deleteLogout = async () => await axios.delete('http://localhost:3000/auth/logout');
 
 export const addProductToCart = async (addedProduct) => {
-    return await axios.post('http://localhost:3000/addProductToCart', addedProduct);
+    const response = await axios.post('http://localhost:3000/addProductToCart', addedProduct);
+    return response.data;
 }
 
 export const fetchUserCart = async (userId) => {

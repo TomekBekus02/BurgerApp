@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContex = createContext();
 
-export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(()=>{
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(() => {
         const token = sessionStorage.getItem("token");
         return token ? JSON.parse(atob(token.split(".")[1])) : null;
     })

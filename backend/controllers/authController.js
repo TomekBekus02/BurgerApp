@@ -27,8 +27,12 @@ exports.loginUser = (req, res, next) => {
                                 { userName: user.userName, role: user.role, userId: user._id }, 
                                 SECRET_KEY,
                                 { expiresIn: '1h' }
-                              );
-                            res.json({ token })
+                            );
+                            let cartQuantity = 0;
+                            for (item of user.cart.items){
+                                cartQuantity += item.quantity
+                            }
+                            res.json({ token, cart: user.cart, cartQuantity })
 
                         })
                     }

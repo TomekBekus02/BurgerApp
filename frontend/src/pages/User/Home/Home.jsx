@@ -33,11 +33,10 @@ export default function Home() {
             {
                 (userIsLoading || userIsFetching)
                     ?
-                    <></>
+                    null
                     :
                     <>
-                        {console.log("User: " + JSON.stringify(user.userId))}
-                        <ButtonCart userCart={userCart} />
+                        <ButtonCart />
                         <OffCanvaCart />
                     </>
             }

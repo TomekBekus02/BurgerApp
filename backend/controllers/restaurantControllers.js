@@ -15,13 +15,16 @@ exports.addToCart = async (req, res) => {
     await user.addProductToCart(product);
 
     const updatedUser = await User.findById(userToken.userId);
-    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart});
+    let cartQuantity = 0;
+    for (item of updatedUser.cart.items){
+        cartQuantity += item.quantity
+    }
+    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity});
 }
 
 exports.getUserCart = async (req, res) => {
     const userId = req.params.userId;
     const user = await User.findById(userId);
-    console.log("Backend: " + user.cart);
     res.status(200).json(user.cart);
 }
 

@@ -3,18 +3,22 @@ import { useState } from "react"
 import { addProductToCart } from "../../../services/api"
 import ToppingCheckBox from "../ToppingCheckBox/ToppingCheckBox";
 import { useAuth } from "../../../Contexts/AuthContext";
+import { useCart } from "../../../Contexts/UserCartContext";
 
 export default function AddProductModal({ productId, imgURL, title, price, description, toppings }) {
   const [currentPrice, setCurrentPrice] = useState(price);
   const [checkedToppings, setCheckedToppings] = useState([]);
   const { user } = useAuth();
+  const { updateCart } = useCart();
   const queryClient = useQueryClient();
   const AddToCart = useMutation({
     mutationFn: (addedProduct) => {
-      addProductToCart(addedProduct)
+      return addProductToCart(addedProduct)
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["User"]);
+    onSuccess: (data) => {
+      //console.log("Koszyk w onSuccess po pobraniu z backendu: " + JSON.stringify(data.cart, null, 2));
+      updateCart(data.cart, data.cartQuantity);
+      //queryClient.invalidateQueries(["User"]);
     },
   })
 
