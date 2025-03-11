@@ -1,4 +1,7 @@
-export default function ButtonCart() {
+import { useEffect, useState } from "react";
+
+export default function ButtonCart({ userCart }) {
+
     return (
         <button
             type="button"
@@ -9,8 +12,7 @@ export default function ButtonCart() {
         >
             <i class="fa-solid fa-cart-shopping fs-4"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                0
-                <span class="visually-hidden">unread messages</span>
+                {/* {userCart.items.length} */}0
             </span>
         </button>
     )

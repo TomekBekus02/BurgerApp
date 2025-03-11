@@ -8,10 +8,13 @@ export default function ToppingCheckBox({ toppingId, title, price, setCurrentPri
         setCurrentPrice((prevPrice) =>
             tempChecked ? prevPrice + toppingPrice : prevPrice - toppingPrice
         )
-        setCheckedToppings((prevChecked) =>
-            tempChecked ? [...prevChecked, { toppingId: toppingId, title: toppingTitle, price: toppingPrice }]
-                : prevChecked.filter(item => item.toppingId != toppingId)
-        )
+        setCheckedToppings((prevChecked) => {
+            const checkedToppings = tempChecked ? [...prevChecked, { toppingId: toppingId, title: toppingTitle, price: toppingPrice }]
+                : prevChecked.filter(item => item.toppingId.toString() != toppingId.toString())
+            return [...checkedToppings].sort((a, b) =>
+                a.toppingId.toString().localeCompare(b.toppingId.toString())
+            );
+        })
         setChecked(prev => !prev);
     }
     return (
@@ -22,7 +25,6 @@ export default function ToppingCheckBox({ toppingId, title, price, setCurrentPri
                 name={`${toppingId}`}
                 value={toppingId}
                 onChange={() => handlecheckBoxStatus(price, title, toppingId)} />
-            {/* jak nie zadziala to sprobować z e.target */}
         </div>
     )
 }

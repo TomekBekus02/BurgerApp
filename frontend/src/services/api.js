@@ -93,3 +93,9 @@ export const deleteLogout = async () => await axios.delete('http://localhost:300
 export const addProductToCart = async (addedProduct) => {
     return await axios.post('http://localhost:3000/addProductToCart', addedProduct);
 }
+
+export const fetchUserCart = async (userId) => {
+    const {data} = await axios.get(`http://localhost:3000/userCart/${userId}`);
+    //console.log("Nowy koszyk: " + JSON.stringify(data, null, 2));
+    return data;
+}

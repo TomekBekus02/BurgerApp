@@ -70,13 +70,23 @@ const userSchema = new Schema({
     }
 })
 
-userSchema.methods.addProductToCart = function(product){
+userSchema.methods.addProductToCart = async function(product){
     const { productId, title, imgURL, price, checkedToppings, currentPrice } = product;
-    console.log(checkedToppings);
-    const cartProductIndex = this.cart.items.findIndex(cp => 
-        cp.cartProduct.productId.toString() === productId.toString()
-    );
-    const newQuantity = 1;
+    const cartProductIndex = this.cart.items.findIndex(cp => {
+        if(cp.cartProduct.productId.toString() !== productId.toString()){
+            return false;
+        }
+        if(cp.cartProduct.addedToppings.length !== checkedToppings.length){
+            return false;
+        }
+        const sortedCartProducts = cp.cartProduct.addedToppings.sort((a,b) => a.toppingId - b.toppingId);
+        const areToppingsEqual = sortedCartProducts.every((addedTopping, index) => {
+                const checkedTopping = checkedToppings[index];
+                return addedTopping.toppingId.toString() === checkedTopping.toppingId.toString();
+            });
+        return areToppingsEqual;
+    });
+    let newQuantity = 1;
     const updatedItemsInCart = [...this.cart.items];
     if(cartProductIndex >= 0){
         newQuantity = this.cart.items[cartProductIndex].quantity + 1;
@@ -102,7 +112,7 @@ userSchema.methods.addProductToCart = function(product){
         items: updatedItemsInCart
     }
     this.cart = updatedCart;
-    return this.save();
+    return await this.save();
 }
 
 module.exports = mongoose.model('User', userSchema);

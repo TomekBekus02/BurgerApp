@@ -6,15 +6,23 @@ import Product from '../../../components/User/Product/Product'
 import "../../../styles/Main.css"
 import InputFilter from "../../../utils/InputFilter"
 import { filteredProd } from "../../../Logic/filterProductsLogic"
-import { fetchProducts } from "../../../services/api"
+import { fetchProducts, fetchUserCart } from "../../../services/api"
 import ButtonCart from "../../../components/User/Cart/ButtonCart/ButtonCart"
 import OffCanvaCart from "../../../components/User/Cart/offCanvaCart/OffCanvaCart"
+import { useAuth } from "../../../Contexts/AuthContext"
 
 export default function Home() {
+
+    const { user } = useAuth();
 
     const { data: products, isLoading, isFetching, isError } = useQuery({
         queryKey: ["Products"],
         queryFn: fetchProducts
+    })
+
+    const { data: userCart, isLoading: userIsLoading, isFetching: userIsFetching, isError: userIsError } = useQuery({
+        queryKey: ["User"],
+        queryFn: () => fetchUserCart(user.userId)
     })
 
     const [filterProductInput, setFilterProductInput] = useState("");
@@ -22,8 +30,17 @@ export default function Home() {
 
     return (
         <div>
-            <ButtonCart />
-            <OffCanvaCart />
+            {
+                (userIsLoading || userIsFetching)
+                    ?
+                    <></>
+                    :
+                    <>
+                        {console.log("User: " + JSON.stringify(user.userId))}
+                        <ButtonCart userCart={userCart} />
+                        <OffCanvaCart />
+                    </>
+            }
             <InputFilter setFilterProductInput={setFilterProductInput} />
             <div className="products">
                 {

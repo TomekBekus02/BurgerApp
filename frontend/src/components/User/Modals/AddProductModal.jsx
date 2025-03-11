@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
-import { addProductToCart, fetchProductById } from "../../../services/api"
+import { addProductToCart } from "../../../services/api"
 import ToppingCheckBox from "../ToppingCheckBox/ToppingCheckBox";
 import { useAuth } from "../../../Contexts/AuthContext";
 
@@ -8,11 +8,14 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
   const [currentPrice, setCurrentPrice] = useState(price);
   const [checkedToppings, setCheckedToppings] = useState([]);
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const AddToCart = useMutation({
     mutationFn: (addedProduct) => {
       addProductToCart(addedProduct)
     },
-    onSuccess: (prod) => console.log(prod),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["User"]);
+    },
   })
 
   const handleAddToCart = () => {
@@ -69,6 +72,7 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
             <button
               type="submit"
               class="btn btn-primary"
+              data-bs-dismiss="modal"
               onClick={handleAddToCart}
             >
               Add your product
