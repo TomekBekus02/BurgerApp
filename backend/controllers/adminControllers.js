@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Product = require('../models/product')
 const Topping = require('../models/topping')
 const mongoose = require('mongoose');
@@ -8,6 +9,22 @@ exports.AddProduct = (req,res,next) => {
     const price = req.body.price;
     const imgURl = req.body.imgUrl;
     const description = req.body.description;
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        const errorMessages = {};
+        errors.array().forEach(error => {
+            if (error.path === 'title') {
+                errorMessages.title = error.msg;
+            } else if (error.path === 'price') {
+                errorMessages.price = error.msg;
+            } else if (error.path === 'imgUrl') {
+                errorMessages.imgUrl = error.msg;
+            } else if (error.path === 'description') {
+                errorMessages.description = error.msg;
+            }
+        })
+        return res.status(422).json(errorMessages);
+    }
 
     const product = new Product({
         title: title,
@@ -30,6 +47,22 @@ exports.UpdateProduct = async (req, res, next) => {
     try {
         const productId = req.params.productId;
         const updatedData = req.body;
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            const errorMessages = {};
+            errors.array().forEach(error => {
+                if (error.path === 'title') {
+                    errorMessages.title = error.msg;
+                } else if (error.path === 'price') {
+                    errorMessages.price = error.msg;
+                } else if (error.path === 'imgUrl') {
+                    errorMessages.imgUrl = error.msg;
+                } else if (error.path === 'description') {
+                    errorMessages.description = error.msg;
+                }
+            })
+            return res.status(422).json(errorMessages);
+        }
         Product.findByIdAndUpdate(productId, updatedData, {new: true})
         .then(updatedProduct => {
             if(!updatedProduct){
@@ -60,6 +93,19 @@ exports.AddTopping = async (req, res, next) => {
         const productId = req.params.productId;
         const title = req.body.title;
         const price = req.body.price;
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            const errorMessages = {};
+            errors.array().forEach(error => {
+                if (error.path === 'title') {
+                    errorMessages.title = error.msg;
+                } else if (error.path === 'price') {
+                    errorMessages.price = error.msg;
+                }
+            })
+            return res.status(422).json(errorMessages);
+        }
+
         const topping = new Topping({
             title:title,
             price:price,
@@ -83,7 +129,18 @@ exports.UpdateTopping = async (req, res, next) => {
     try {
         const toppingId = req.params.toppingId;
         const { title, price } = req.body;
-
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            const errorMessages = {};
+            errors.array().forEach(error => {
+                if (error.path === 'title') {
+                    errorMessages.title = error.msg;
+                } else if (error.path === 'price') {
+                    errorMessages.price = error.msg;
+                }
+            })
+            return res.status(422).json(errorMessages);
+        }
         const topping = await Topping.findById(toppingId);
         if (!topping) {
             return res.status(404).json({ message: 'Topping not found' });

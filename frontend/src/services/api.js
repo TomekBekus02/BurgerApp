@@ -12,21 +12,37 @@ export const fetchProductById = async (productId) => {
 }
 
 export const addProduct = async (newOrder) => {
-    const token = sessionStorage.getItem("token");
-    return await axios.post("http://localhost:3000/admin/product", newOrder, {
-        headers: {
-            'authorization': `Bearer ${token}`
+    try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.post("http://localhost:3000/admin/product", newOrder, {
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            return Promise.reject(error.response.data); 
         }
-    });
+        return Promise.reject(error);
+    }
 }
 
 export const updateProduct = async (editedProduct, productId) => {
-    const token = sessionStorage.getItem("token");
-    return await axios.put(`http://localhost:3000/admin/product/${productId}`, editedProduct, {
-        headers: {
-            'authorization': `Bearer ${token}`
+    try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.put(`http://localhost:3000/admin/product/${productId}`, editedProduct, {
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            return Promise.reject(error.response.data); 
         }
-    });
+        return Promise.reject(error);
+    }
 }
 
 export const deleteProduct = async (productId) => {
@@ -51,21 +67,37 @@ export const fetchToppingById = async (toppingId) => {
 }
 
 export const addTopping = async (newTopping, productId) => {
-    const token = sessionStorage.getItem("token");
-    return await axios.post(`http://localhost:3000/admin/topping/${productId}`, newTopping, {
-        headers: {
-            'authorization': `Bearer ${token}`
+    try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.post(`http://localhost:3000/admin/topping/${productId}`, newTopping, {
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            return Promise.reject(error.response.data); 
         }
-    });
+        return Promise.reject(error);
+    }
 }
 
 export const updateTopping = async (editedTopping, toppingId) => {
-    const token = sessionStorage.getItem("token");
-    return await axios.put(`http://localhost:3000/admin/topping/${toppingId}`, editedTopping, {
-        headers: {
-            'authorization': `Bearer ${token}`
+    try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.put(`http://localhost:3000/admin/topping/${toppingId}`, editedTopping, {
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            return Promise.reject(error.response.data); 
         }
-    });
+        return Promise.reject(error);
+    }
 }
 
 export const deleteTopping = async (productId, toppingId) => {
