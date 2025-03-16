@@ -1,16 +1,17 @@
 import { useRef } from "react"
 import DialogTopping from "../../../Dialogs/DialogTopping/DialogTopping"
 
-export default function AdminTopping({title, price, id}){
+import adminToppingStyles from './AdminTopping.module.css'
+
+export default function AdminTopping({ title, price, id }) {
     const dialog = useRef();
     const handleToppingModify = () => {
         dialog.current.showModal();
     }
     return (
-        <div key={id} className="topping-box" onClick={handleToppingModify}>
-            <DialogTopping ref={dialog} toppingId={id}/>
-            <p>{title}</p>
-            <p>{price}zł</p>
+        <div key={id} className={`${adminToppingStyles.toppingBox}`} onClick={handleToppingModify}>
+            <DialogTopping ref={dialog} toppingId={id} />
+            <p className="">{title} +{price}zł</p>
         </div>
     )
 }

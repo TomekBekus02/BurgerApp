@@ -1,10 +1,11 @@
 import { useCart } from "../../../../Contexts/UserCartContext"
 import ProductCart from "../CartProduct/ProductCart";
+import OffCanvaCartStyles from './OffCanvaCart.module.css'
 
 export default function OffCanvaCart() {
     const { cart, cartTotalPrice } = useCart();
     return (
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class={`${OffCanvaCartStyles.offcanvasContainer} offcanvas offcanvas-end`} data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
                 <h5
                     class="offcanvas-title"
@@ -23,7 +24,7 @@ export default function OffCanvaCart() {
                 {
                     (cart && cart.length > 0)
                         ?
-                        <div className="cartContainer w-100 d-flex flex-column">
+                        <div className={`${OffCanvaCartStyles.productsContainer} w-100 d-flex flex-column`}>
                             {
                                 cart.map(item => {
                                     return <ProductCart
@@ -36,11 +37,12 @@ export default function OffCanvaCart() {
                                 })
                             }
 
-                            <h1>Total Price: {cartTotalPrice}zł</h1>
                         </div>
                         :
-                        <p>Your Cart is Empty</p>
+                        <p className="text-light text-center fs-5">Your Cart is Empty</p>
                 }
+                <h1 className="border-top border-bottom p-3 text-center text-light">Total Price: {cartTotalPrice}zł</h1>
+                <button className="w-100 btn btn-success fs-4">Order</button>
 
             </div>
         </div>

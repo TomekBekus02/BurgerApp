@@ -1,29 +1,31 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../../Contexts/AuthContext"
-import './Product.css'
+//import './Product.css'
 import '../../../styles/utilStyles.css'
 import AddProductModal from '../Modals/AddProductModal'
+import productStyles from './Product.module.css'
 
 export default function product({ id, imgURL, title, price, description, toppings }) {
     const { user } = useAuth();
     const navigate = useNavigate();
     return (
-        <div key={id} className="product-box">
-            <div className="product">
-                <div className='imgContainer'>
+        <div key={id} className={productStyles.productBox}>
+            <div className={productStyles.product}>
+                <div className={productStyles.imgContainer}>
                     <img src={`${imgURL}`} alt={`${title}`} />
-                    <p>{price}zł</p>
+
+                    <h3>{price}zł</h3>
                 </div>
                 <h2>{title}</h2>
-                <div className="button-container">
-                    <button className='details-button btn'>Details</button>
+                <div className={productStyles.buttonContainer}>
+                    {/* <button className={`${productStyles.detailsButton} btn`}>Details</button> */}
                     {/* <!-- Button trigger modal --> */}
                     {
                         user
                             ?
                             <button
                                 type="button"
-                                class="btn btn-primary"
+                                className={`${productStyles.addCartButton} btn`}
                                 data-bs-toggle="modal"
                                 data-bs-target={`#productModal-${id}`}
                             >
@@ -32,6 +34,7 @@ export default function product({ id, imgURL, title, price, description, topping
                             :
                             <button
                                 type="button"
+                                className={`${productStyles.addCartButton} btn`}
                                 onClick={() => navigate('/login')}
                             >
                                 Add product

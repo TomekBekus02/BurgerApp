@@ -1,0 +1,52 @@
+.loginPhotoo{
+    background-image: url("/assets/images/loginPhoto.png");
+    width: 450px;
+    height: 600px;
+}
+
+.mainBackgroundd{
+    background-image: url("/assets/images/backgroundTest.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.loginBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, #4f5850, #316334);
+    border-radius: 15px;
+    padding-left: 40px;
+}
+
+.loginBox form{
+    padding-right: 40px;
+    width: 350px;
+}
+.loginBox form p{
+    font-size: 18px;
+    color: #ffffff;
+}
+.loginBox form label{
+    font-size: 16px;
+    color: #544f58;
+}
+.loginBox form input {
+    font-size: 18px;
+}
+.loginBox .showPaswordLabel{
+    font-size: 18px;
+    color: #ffffff;
+}
+.loginBox .showPaswordInput:checked{
+    background-color: #167b2e; 
+    border-color: #22b143;
+}
+.loginBox .showPaswordInput:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}

@@ -1,0 +1,12 @@
+.toppingBox {
+    background-color: rgb(52, 122, 32);
+    max-height: 30px;
+    margin: 5px;
+    border-radius: 20px;
+    padding: 2px;
+    cursor: pointer;
+}
+.toppingBox:hover {
+    transition: background-color 0.3s;
+    background-color: rgb(59, 167, 29);
+}

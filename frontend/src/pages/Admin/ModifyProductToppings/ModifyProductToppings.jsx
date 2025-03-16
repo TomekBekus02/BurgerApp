@@ -4,27 +4,31 @@ import axios from "axios"
 
 import AdminProductDetails from "../../../components/Admin/AdminProductDetails/AdminProductDetails"
 import { fetchProductById } from "../../../services/api"
+import LoginStyles from '../../User/Login/Login.module.css';
 
-export default function ModifyProductToppings(){
+export default function ModifyProductToppings() {
 
     const { productId } = useParams();
-    const {data: product, isLoading, isFetching, isError} = useQuery({
-        queryKey: ["Products", productId], 
+    const { data: product, isLoading, isFetching, isError } = useQuery({
+        queryKey: ["Products", productId],
         queryFn: () => fetchProductById(productId),
     })
     return (
-        <div>
-            <h1>Modify Topping</h1>
-            {
-                ( isLoading || isFetching )
-                    ? <p>Loading...</p> 
-                    : <AdminProductDetails
-                        id={product._id}
-                        title={product.title}
-                        imgURL={product.imgUrl}
-                        price={product.price}
-                    />
-            }
+        <div className={`${LoginStyles.mainBackgroundd}`}>
+            <div className="container">
+                {
+                    (isLoading || isFetching)
+                        ? <p>Loading...</p>
+                        : <AdminProductDetails
+                            id={product._id}
+                            title={product.title}
+                            imgURL={product.imgUrl}
+                            price={product.price}
+                        />
+                }
+            </div>
         </div>
+
+
     )
 }

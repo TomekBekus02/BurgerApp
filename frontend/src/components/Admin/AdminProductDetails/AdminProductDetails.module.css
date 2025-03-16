@@ -1,0 +1,78 @@
+.productBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(90deg, #4f5850, #316334);
+    border-radius: 15px;
+    width: 70%;
+}
+
+.contentContainer {
+    display: flex;
+    justify-content: center;
+}
+.productSide img {
+    width: 100%;
+}
+.contentContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    padding: 10px;
+}
+.toppingSide {
+    background-color: #475249ad;
+    border-radius: 20px;
+    padding: 10px;
+}
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.buttonContainer button {
+    width: 130px !important;
+    margin-top: 15px;
+}
+.toppingsContainer {
+    height: 250px;
+    overflow: auto;
+}
+.toppingContent{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: aliceblue;
+    text-align: center;
+}
+
+/* .admin-product{
+    height: 100%;
+}
+.product h3{
+    text-align: center;
+    margin-top: 5px;
+}
+.toppings-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+}
+.toppings-container p{
+    text-align: center;
+}
+.topping-box{
+    margin: 5px;
+    text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color .2s ease-in;
+    border-radius: 30px;
+}
+.topping-box:hover{
+    background-color: #da6a6abf;
+}
+.toppings-box{
+    border-top: 1px dashed red;
+    margin-top: 5px;
+} */

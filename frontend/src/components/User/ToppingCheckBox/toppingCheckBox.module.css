@@ -1,0 +1,12 @@
+.checkBoxInput:checked {
+    background-color: #167b2e; 
+    border-color: #22b143;
+}
+.checkBoxInput:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+.checkBoxLabel{
+    font-size: 19px;
+    color: #ffffff;
+    padding-left: 5px;
+}

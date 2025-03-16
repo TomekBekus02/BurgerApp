@@ -1,9 +1,0 @@
-.dialog-container .button-container{
-    display: flex;
-}
-.button-container .green-button{
-    background-color: #248712;
-}
-.button-container .green-button:hover{
-    background-color: #469e36;
-}

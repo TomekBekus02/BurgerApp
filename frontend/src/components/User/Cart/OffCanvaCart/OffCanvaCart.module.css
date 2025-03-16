@@ -1,0 +1,12 @@
+.offcanvasContainer {
+    background-color: #656865;
+    width: 25% !important;
+    padding: 0 !important;
+}
+.productsContainer{
+    max-height: 76%;
+    overflow: auto;
+}
+.offcanvasContainer i, h5{
+    color: aliceblue;
+}

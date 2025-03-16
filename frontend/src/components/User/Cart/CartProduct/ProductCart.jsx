@@ -3,6 +3,8 @@ import { useCart } from "../../../../Contexts/UserCartContext";
 import { useAuth } from "../../../../Contexts/AuthContext";
 import { updatedQuantity } from "../../../../services/api";
 
+import ProductCartStyles from './CartProduct.module.css';
+
 export default function ProductCart({ cartProductId, quantity, itemCartPrice, cartProduct }) {
     const { user } = useAuth();
     const { updateCart } = useCart()
@@ -18,29 +20,37 @@ export default function ProductCart({ cartProductId, quantity, itemCartPrice, ca
         ModifyQuantity.mutate({ userId: user.userId, cartProductId, operation })
     }
     return (
-        <div className="itemCartContainer d-flex align-items-center pb-1">
-            <button className="h-50 w-50" onClick={() => HandleModifyQuantity('add')}>+</button>
-            <div className="itemContainer">
+        <div className={`${ProductCartStyles.itemCartContainer}`} >
+            <div className={`${ProductCartStyles.itemContainer}`}>
                 <img src={`${cartProduct.imgUrl}`} alt={`${cartProduct.title}`} />
-                <p>{cartProduct.title}</p>
-                <p>Quantity: {quantity}</p>
-                <p>{itemCartPrice}zł</p>
-                <div className="toppingsContainer">
+                <h2>{cartProduct.title}</h2>
+                <h5>{quantity} x {itemCartPrice}zł</h5>
+                <div className={`${ProductCartStyles.toppingsContainer}`}>
+
                     {
-                        cartProduct.addedToppings.map(topping => {
-                            return (
-                                <div className="toppingContainer d-flex" key={topping.toppingId}>
-                                    <p>{topping.title} </p>
-                                    <p>. {topping.price}zł</p>
-                                </div>
-                            )
-                        })
+                        cartProduct.addedToppings.length > 0 &&
+                        <>
+                            <h5>Toppings: </h5>
+                            {
+                                cartProduct.addedToppings.map(topping => {
+                                    return (
+                                        <div className={`${ProductCartStyles.toppingContainer}`} key={topping.toppingId}>
+                                            <p>{topping.title}</p>
+                                            <p>+{topping.price}zł</p>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </>
+
+
                     }
                 </div>
-                <button onClick={() => HandleModifyQuantity('delete')}>Delete</button>
+                <button className={`${ProductCartStyles.buttonEditQuntity} ${ProductCartStyles.buttonPlus}`} onClick={() => HandleModifyQuantity('add')}>+</button>
+                <button className="btn btn-success w-50" onClick={() => HandleModifyQuantity('delete')}>Delete</button>
+                <button className={`${ProductCartStyles.buttonEditQuntity} ${ProductCartStyles.buttonMinus}`} onClick={() => HandleModifyQuantity('sub')}>-</button>
                 <hr />
             </div>
-            <button className="h-50 w-50" onClick={() => HandleModifyQuantity('sub')}>-</button>
-        </div>
+        </div >
     )
 }

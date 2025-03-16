@@ -6,7 +6,7 @@ export default function ButtonCart({ userCart }) {
     return (
         <button
             type="button"
-            class="btn btn-primary position-fixed end-0 me-3"
+            class="btn btn-success position-fixed end-0 me-3 mt-3"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasWithBothOptions"
             aria-controls="offcanvasWithBothOptions"

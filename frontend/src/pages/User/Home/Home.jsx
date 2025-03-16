@@ -3,39 +3,32 @@ import { useState } from "react"
 import axios from "axios"
 
 import Product from '../../../components/User/Product/Product'
-import "../../../styles/Main.css"
 import InputFilter from "../../../utils/InputFilter"
 import { filteredProd } from "../../../Logic/filterProductsLogic"
 import { fetchProducts, fetchUserCart } from "../../../services/api"
 import ButtonCart from "../../../components/User/Cart/ButtonCart/ButtonCart"
-import OffCanvaCart from "../../../components/User/Cart/offCanvaCart/OffCanvaCart"
-import { useAuth } from "../../../Contexts/AuthContext"
+import OffCanvaCart from "../../../components/User/Cart/OffCanvaCart/OffCanvaCart"
+import homeStyles from './Home.module.css'
 
 export default function Home() {
-
-    const { user } = useAuth();
 
     const { data: products, isLoading, isFetching, isError } = useQuery({
         queryKey: ["Products"],
         queryFn: fetchProducts
     })
 
-    // const { data: userCart, isLoading: userIsLoading, isFetching: userIsFetching, isError: userIsError } = useQuery({
-    //     queryKey: ["User"],
-    //     queryFn: () => fetchUserCart(user.userId)
-    // })
-
     const [filterProductInput, setFilterProductInput] = useState("");
     const filteredProducts = products ? filteredProd(products, filterProductInput) : [];
 
     return (
-        <div>
+
+        <div className={homeStyles.mainBackground}>
 
             <ButtonCart />
             <OffCanvaCart />
 
             <InputFilter setFilterProductInput={setFilterProductInput} />
-            <div className="products">
+            <div className={homeStyles.products}>
                 {
                     (isLoading || isFetching)
                         ? <p>Loading...</p>
@@ -57,5 +50,7 @@ export default function Home() {
                 }
             </div>
         </div>
+
+
     )
 }

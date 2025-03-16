@@ -1,16 +1,36 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { addProductToCart } from "../../../services/api"
 import ToppingCheckBox from "../ToppingCheckBox/ToppingCheckBox";
 import { useAuth } from "../../../Contexts/AuthContext";
 import { useCart } from "../../../Contexts/UserCartContext";
 
+import ModalStyles from './AddProductModal.module.css'
+
+
 export default function AddProductModal({ productId, imgURL, title, price, description, toppings }) {
+  useEffect(() => {
+    const removeBackdrop = () => {
+      if (!document.hidden) {
+        const backdrop = document.querySelector(".modal-backdrop");
+        if (backdrop) {
+          backdrop.remove();
+          document.body.classList.remove("modal-open");
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", removeBackdrop);
+
+    return () => {
+      document.removeEventListener("visibilitychange", removeBackdrop);
+    };
+  }, []);
   const [currentPrice, setCurrentPrice] = useState(price);
   const [checkedToppings, setCheckedToppings] = useState([]);
   const { user } = useAuth();
   const { updateCart } = useCart();
-  const queryClient = useQueryClient();
+
   const AddToCart = useMutation({
     mutationFn: (addedProduct) => {
       return addProductToCart(addedProduct)
@@ -26,7 +46,7 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
   return (
     // <!-- Modal -->
     <div
-      class="modal fade"
+      className="modal fade"
       id={`productModal-${productId}`}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
@@ -34,21 +54,21 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
       aria-labelledby={`productModal-${productId}`}
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5 w-100" id={`productModal-${productId}`}>Add your personalized dish</h1>
-            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+      <div className={`${ModalStyles.modalDialog} modal-dialog modal-dialog-centered modal-dialog-scrollable`}>
+        <div className={`${ModalStyles.modalContent} modal-content`}>
+          <div className="modal-header">
+            <h1 className="modal-title fs-3 w-100 text-center" id={`productModal-${productId}`}>
+              Add your personalized dish
+            </h1>
           </div>
           {
-            <div class="modal-body">
-              <img src={`${imgURL}`} alt={`${title}`} />
-              <h1>{title}</h1>
-              <p>{price}</p>
-              <p>{description}</p>
-
+            <div className="d-flex">
+              <div className={`${ModalStyles.modalBody}`}>
+                <img src={`${imgURL}`} alt={`${title}`} />
+                <h1>{title}, {price}zł</h1>
+                {/* <p>{description}</p> */}
+              </div>
               <form>
-                <p>Toppings</p>
                 {
                   toppings.items.length > 0
                     ?
@@ -63,22 +83,24 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
                       />
                     )
                     :
-                    <p>no toppings</p>
+                    <p className="text-center">No toppings</p>
                 }
               </form>
             </div>
           }
-          <div class="modal-footer">
+          <div className={`${ModalStyles.modalFooter} modal-footer`}>
             <h1>Price: {currentPrice}zł</h1>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-              onClick={handleAddToCart}
-            >
-              Add your product
-            </button>
+            <div className={`${ModalStyles.buttonsBox} `}>
+              <button
+                type="submit"
+                className="btn btn-success"
+                data-bs-dismiss="modal"
+                onClick={handleAddToCart}
+              >
+                Add your product
+              </button>
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>

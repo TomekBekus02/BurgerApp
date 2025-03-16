@@ -1,4 +1,5 @@
 import { useState } from "react"
+import toppingCheckBoxStyles from './toppingCheckBox.module.css'
 
 export default function ToppingCheckBox({ toppingId, title, price, setCurrentPrice, setCheckedToppings }) {
     const [checked, setChecked] = useState(false);
@@ -19,12 +20,18 @@ export default function ToppingCheckBox({ toppingId, title, price, setCurrentPri
     }
     return (
         <div>
-            <label htmlFor={`${toppingId}`}>{title} {price}zł .</label>
             <input
                 type="checkbox"
+                className={`${toppingCheckBoxStyles.checkBoxInput} form-check-input`}
                 name={`${toppingId}`}
                 value={toppingId}
                 onChange={() => handlecheckBoxStatus(price, title, toppingId)} />
+            <label
+                className={`${toppingCheckBoxStyles.checkBoxLabel}`}
+                htmlFor={`${toppingId}`}
+            >
+                {title} {price}zł
+            </label>
         </div>
     )
 }

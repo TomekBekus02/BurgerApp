@@ -2,14 +2,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { fetchToppingById, updateTopping } from "../../../services/api";
+import LoginStyles from '../../User/Login/Login.module.css';
 
-export default function EditTopping(){
+export default function EditTopping() {
     const { toppingId, productId } = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
     const editTopping = useMutation({
-        mutationFn: ({editedTopping, toppingId}) => updateTopping(editedTopping, toppingId),
+        mutationFn: ({ editedTopping, toppingId }) => updateTopping(editedTopping, toppingId),
         onSuccess: () => {
             queryClient.invalidateQueries(["Toppings", toppingId]);
             queryClient.invalidateQueries(["Products", productId]);
@@ -17,8 +18,8 @@ export default function EditTopping(){
         }
     })
 
-    const {data: topping, isLoading, isFetching, isError} = useQuery({
-        queryKey: ["Toppings", toppingId], 
+    const { data: topping, isLoading, isFetching, isError } = useQuery({
+        queryKey: ["Toppings", toppingId],
         queryFn: ({ queryKey }) => {
             const [, toppingId] = queryKey;
             return fetchToppingById(toppingId);
@@ -30,28 +31,62 @@ export default function EditTopping(){
         const formData = new FormData(e.target);
         const title = formData.get('title');
         const price = formData.get('price');
-        editTopping.mutate({editedTopping: {title, price}, toppingId});
+        editTopping.mutate({ editedTopping: { title, price }, toppingId });
     }
     return (
-        <div className="container">
-            <div className="add-product-container">
-                <h1>Edit topping</h1>
-                {
-                    ( isLoading || isFetching ) 
-                    ? 
-                        <p>Loading...</p> 
-                    :
-                        <form onSubmit={handleSubmit}>
-                            <label for="title">Title:</label>
-                            <input type="text" id="title" name="title" defaultValue={topping.title} required/>
+        <div className={`${LoginStyles.mainBackgroundd}`}>
+            <div className="container">
+                <div className={`${LoginStyles.loginBox}`}>
+                    {
+                        (isLoading || isFetching)
+                            ?
+                            <p>Loading...</p>
+                            :
+                            <form onSubmit={handleSubmit}>
+                                <h1 className="text-light text-center p-3">Edit topping</h1>
+                                <div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="title" name="title" placeholder="title" defaultValue={topping.title} required />
+                                    <label for="title">Title</label>
+                                </div>
+                                <div className="form-floating mb-3">
+                                    <input type='number' className="form-control" id="price" name="price" placeholder="price" defaultValue={topping.price} required />
+                                    <label for="price">Price</label>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="btn btn-success end-2 w-100 mb-3"
+                                >
+                                    Save
+                                </button>
+                                {/* <label for="title">Title:</label>
+                                <input type="text" id="title" name="title" defaultValue={topping.title} required />
 
-                            <label for="price">Price:</label>
-                            <input type="number" id="price" name="price" defaultValue={topping.price} required/>
+                                <label for="price">Price:</label>
+                                <input type="number" id="price" name="price" defaultValue={topping.price} required />
 
-                            <button type="submit" className="btn">Edit topping</button>
-                        </form>
-                }
+                                <button type="submit" className="btn">Edit topping</button> */}
+                            </form>
+                    }
+                </div>
             </div>
         </div>
+
     )
 }
+
+
+{/* <h1 className="text-light text-center p-3">Add topping</h1>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="title" name="title" placeholder="title" required />
+                            <label for="title">Title</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type='number' className="form-control" id="price" name="price" placeholder="price" required />
+                            <label for="price">Price</label>
+                        </div>
+                        <button
+                            type="submit"
+                            className="btn btn-success end-2 w-100 mb-3"
+                        >
+                            Save
+                        </button> */}

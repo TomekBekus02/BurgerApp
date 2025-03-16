@@ -16,11 +16,10 @@ const User = require('./models/user');
 const { verifyToken } = require('./controllers/verifyToken');
 
 const MONGODB_URI = process.env.DATABASE_URI;
-const secret = crypto.randomBytes(64).toString('hex');
+const secret = process.env.SESSION_SECRET;
 const store = new MongodbStore({
     uri: MONGODB_URI,
     collection: 'sessions',
-    autoRemove: 'interval'
 })
 
 app.use(express.json());

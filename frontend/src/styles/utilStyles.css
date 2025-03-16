@@ -1,4 +1,4 @@
-.btnn{
+.btn{
     border-radius: 30px;
     padding: 5px;
     width: 80px;
@@ -37,4 +37,7 @@
 input:focus {
     outline: none;
     border: none;
+}
+input {
+    outline: none;
 }
