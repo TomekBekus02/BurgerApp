@@ -86,7 +86,18 @@ export const postLogin = async (User) => {
 }
 
 export const postSignIn = async (newUser) => {
-    return await axios.post('http://localhost:3000/auth/signup', newUser);
+    try {
+        const response = await axios.post('http://localhost:3000/auth/signup', newUser);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            return Promise.reject(error.response.data); 
+        }
+        return Promise.reject(error);
+    }
+    
+    console.log("Response", response, null, 2);
+    
 }
 
 export const deleteLogout = async () => await axios.delete('http://localhost:3000/auth/logout');

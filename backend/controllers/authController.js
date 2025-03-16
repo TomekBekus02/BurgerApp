@@ -3,6 +3,7 @@ const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
+const { validationResult } = require('express-validator');
 
 
 exports.loginUser = (req, res, next) => {
@@ -57,31 +58,39 @@ exports.signupUser = async (req, res, next) => {
     const userName = req.body.userName;
     const email = req.body.userEmail;
     const password = req.body.userPassword;
-    
-    try {
-        User.findOne({email: email})
-        .then(userDoc => {
-            if(userDoc){
-                console.log("User with this email already exist");
-                return res.status(409).json({message: "User with this email already exist"});
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        const errorMessages = {};
+        errors.array().forEach(error => {
+            if (error.path === 'userName') {
+                errorMessages.userName = error.msg;
+            } else if (error.path === 'userEmail') {
+                errorMessages.userEmail = error.msg;
+            } else if (error.path === 'userPassword') {
+                errorMessages.userPassword = error.msg;
+            } else if (error.path === 'userConfirmPassword') {
+                errorMessages.userConfirmPassword = error.msg;
             }
-            console.log("useDoc: " + userDoc);
-            return bcryptjs
-                .hash(password, 12)
-                .then(hashedPassword => {
-                    const user = new User({
-                        userName: userName,
-                        email: email,
-                        password: hashedPassword,
-                        cart: { item: [] },
-                        role: "user"
-                    })
-                    return user.save();
-                })
-                .then(user => {
-                    return res.status(200).json(user);
-                })
-        }).catch(err=>{
+        })
+        return res.status(422).json(errorMessages);
+    }
+    try {
+        bcryptjs
+        .hash(password, 12)
+        .then(hashedPassword => {
+            const user = new User({
+                userName: userName,
+                email: email,
+                password: hashedPassword,
+                cart: { item: [] },
+                role: "user"
+            })
+                return user.save();
+        })
+        .then(user => {
+            return res.status(200).json(user);
+        })
+        .catch(err=>{
             console.log(err);
         })
     } catch (error) {
