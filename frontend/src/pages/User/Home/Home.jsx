@@ -45,7 +45,7 @@ export default function Home() {
                                     />
                                 )
                             })
-                            : <p>No Products</p>
+                            : <h4 className="text-light">No Products</h4>
 
                 }
             </div>

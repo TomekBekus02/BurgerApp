@@ -13,13 +13,10 @@ export default function product({ id, imgURL, title, price, description, topping
             <div className={productStyles.product}>
                 <div className={productStyles.imgContainer}>
                     <img src={`${imgURL}`} alt={`${title}`} />
-
                     <h3>{price}zł</h3>
                 </div>
                 <h2>{title}</h2>
                 <div className={productStyles.buttonContainer}>
-                    {/* <button className={`${productStyles.detailsButton} btn`}>Details</button> */}
-                    {/* <!-- Button trigger modal --> */}
                     {
                         user
                             ?

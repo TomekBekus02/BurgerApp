@@ -42,7 +42,7 @@ export default function OffCanvaCart() {
                         <p className="text-light text-center fs-5">Your Cart is Empty</p>
                 }
                 <h1 className="border-top border-bottom p-3 text-center text-light">Total Price: {cartTotalPrice}zł</h1>
-                <button className="w-100 btn btn-success fs-4">Order</button>
+                <button className="w-100 btn btn-success fs-4" disabled>Order</button>
 
             </div>
         </div>

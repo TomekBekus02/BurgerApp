@@ -19,9 +19,9 @@ exports.addToCart = async (req, res) => {
     let cartTotalPrice = 0;
     for (item of updatedUser.cart.items){
         cartQuantity += item.quantity
-        cartTotalPrice += item.itemCartPrice * item.quantity
+        cartTotalPrice += +item.itemCartPrice * item.quantity
     }
-    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice});
+    res.status(200).json({messege: "succes add to cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice: cartTotalPrice.toFixed(2)});
 }
 
 exports.getUserCart = async (req, res) => {
@@ -43,9 +43,9 @@ exports.updateCartQuantity = async (req, res) => {
     let cartTotalPrice = 0;
     for (item of updatedUser.cart.items){
         cartQuantity += item.quantity
-        cartTotalPrice += item.itemCartPrice * item.quantity
+        cartTotalPrice += +item.itemCartPrice * item.quantity
     }
     //console.log(cartTotalPrice);
-    res.status(200).json({messege: "succes updated cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice});
+    res.status(200).json({messege: "succes updated cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice: cartTotalPrice.toFixed(2)});
 }
 

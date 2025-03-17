@@ -6,6 +6,8 @@ import InputFilter from "../../../utils/InputFilter"
 import { filteredProd } from "../../../Logic/filterProductsLogic"
 import { fetchProducts } from "../../../services/api"
 import homeStyles from '../../User/Home/Home.module.css'
+import adminHomeStyles from './AdminHome.module.css'
+import { Link } from "react-router-dom"
 
 
 export default function AdminHome() {
@@ -18,9 +20,9 @@ export default function AdminHome() {
 
     return (
         <div className={homeStyles.mainBackground}>
-            <div className={``}>
+            <div className="d-flex">
                 <InputFilter setFilterProductInput={setFilterProductInput} />
-
+                <button className={`${adminHomeStyles.buttonStyles} btn btn-success`}><Link to="/admin/add-product" className="nav-link">Add product</Link></button>
             </div>
             <div className={homeStyles.products}>
                 {
@@ -37,7 +39,7 @@ export default function AdminHome() {
                                     />
                                 )
                             })
-                            : <p>No Products</p>
+                            : <h4 className="text-light">No Products</h4>
                 }
             </div>
         </div>

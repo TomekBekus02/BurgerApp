@@ -89,7 +89,7 @@ export default function AddProductModal({ productId, imgURL, title, price, descr
             </div>
           }
           <div className={`${ModalStyles.modalFooter} modal-footer`}>
-            <h1>Price: {currentPrice}zł</h1>
+            <h2>Price: {currentPrice}zł</h2>
             <div className={`${ModalStyles.buttonsBox} `}>
               <button
                 type="submit"

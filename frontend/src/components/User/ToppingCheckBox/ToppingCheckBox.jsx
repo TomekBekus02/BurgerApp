@@ -7,7 +7,7 @@ export default function ToppingCheckBox({ toppingId, title, price, setCurrentPri
     const handlecheckBoxStatus = (toppingPrice, toppingTitle, toppingId) => {
         const tempChecked = !checked
         setCurrentPrice((prevPrice) =>
-            tempChecked ? prevPrice + toppingPrice : prevPrice - toppingPrice
+            parseFloat(((tempChecked ? prevPrice + +toppingPrice : prevPrice - +toppingPrice).toFixed(2)))
         )
         setCheckedToppings((prevChecked) => {
             const checkedToppings = tempChecked ? [...prevChecked, { toppingId: toppingId, title: toppingTitle, price: toppingPrice }]

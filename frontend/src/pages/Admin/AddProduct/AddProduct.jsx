@@ -17,7 +17,7 @@ export default function AddProduct() {
         mutationFn: (newOrder) => addProduct(newOrder),
         onSuccess: () => {
             queryClient.invalidateQueries(["Products"])
-            navigate("/")
+            navigate("/admin/admin-home")
         },
         onError: (errors) => {
             setTitleMsg(errors.title ?? '');

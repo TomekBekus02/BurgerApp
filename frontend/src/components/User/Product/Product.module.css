@@ -4,9 +4,9 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 .product {
-    
     border-radius: 20px;
     background: linear-gradient(1deg, #66ea6a6d, #544f584c);
 }

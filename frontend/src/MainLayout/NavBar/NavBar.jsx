@@ -65,14 +65,11 @@ export default function NavBar() {
                         </li> */}
                         {
                             user && user.role === 'admin' && (
-                                <>
-                                    <li className="nav-item">
-                                        <Link to="/admin/admin-home" className="nav-link">Admin Home</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/admin/add-product" className="nav-link">Add product</Link>
-                                    </li>
-                                </>
+
+                                <li className="nav-item">
+                                    <Link to="/admin/admin-home" className="nav-link">Admin Home</Link>
+                                </li>
+
                             )
                         }
                     </ul>

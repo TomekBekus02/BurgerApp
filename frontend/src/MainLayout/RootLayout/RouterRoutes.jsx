@@ -10,27 +10,30 @@ import ModifyProductToppings from '../../pages/Admin/ModifyProductToppings/Modif
 import EditTopping from '../../pages/Admin/EditTopping/EditTopping'
 import Login from '../../pages/User/Login/Login'
 import SignUp from '../../pages/User/SignUp/SignUp'
+import ErrorPage from '../../pages/Error/ErrorPage'
 
 export const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <RootLayout />,
-      children: [
-        {path: '', element: <Home />},
-        {path: '/login', element: <Login />},
-        {path: '/sign-up', element: <SignUp/>},
-      ]
-    },
-    {
-      path: '/admin',
-      element: <AdminRootLayout />,
-      children: [
-        {path: 'admin-home', element: <AdminHome />},
-        {path: 'add-product', element: <AddProduct/>},
-        {path: 'add-topping/:productId', element: <AddTopping/>},
-        {path: 'edit-topping/:productId/:toppingId', element: <EditTopping/>},
-        {path: 'edit-product/:productId', element: <EditProduct/>},
-        {path: 'modify-topping/:productId', element: <ModifyProductToppings/>},
-      ]
-    }
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: '', element: <Home /> },
+      { path: '/login', element: <Login /> },
+      { path: '/sign-up', element: <SignUp /> },
+    ]
+  },
+  {
+    path: '/admin',
+    element: <AdminRootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: 'admin-home', element: <AdminHome /> },
+      { path: 'add-product', element: <AddProduct /> },
+      { path: 'add-topping/:productId', element: <AddTopping /> },
+      { path: 'edit-topping/:productId/:toppingId', element: <EditTopping /> },
+      { path: 'edit-product/:productId', element: <EditProduct /> },
+      { path: 'modify-topping/:productId', element: <ModifyProductToppings /> },
+    ]
+  }
 ])
