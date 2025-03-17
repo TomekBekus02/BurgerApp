@@ -1,10 +1,15 @@
 🍔 Burger Restaurant Page
 Description
 A full-stack application built using React, Node.js with Express, and a MongoDB database.
+
 It allows users to:
+
 ✅ Register and log in
+
 ✅ Browse products
+
 ✅ Manage their cart
+
 ✅ Add personalized products to their cart
 
 The administrator has the ability to:
