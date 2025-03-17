@@ -5,8 +5,11 @@ All data is stored in MongoDB.
 
 It allows users to:
 ✅ Register and log in
+
 ✅ Browse products
+
 ✅ Manage their cart
+
 ✅ Add personalized products to their cart
 
 The administrator has the ability to:
