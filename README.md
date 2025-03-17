@@ -28,28 +28,30 @@ The administrator has the ability to:
 
 🚀 How to Run This App
 
+
 1️⃣ Clone the repository
 
-git clone https://github.com/TomekBekus02/BurgerApp.git
+  - git clone https://github.com/TomekBekus02/BurgerApp.git
+
 
 2️⃣ Backend setup
 
-cd backend    # Navigate to the backend folder  
+  - cd backend    # Navigate to the backend folder  
 
-npm install   # Install dependencies  
+  - npm install   # Install dependencies  
 
-npm start     # Start the backend  
-
+  - npm start     # Start the backend  
 
 After running npm start, you should see "Database Connected" in your terminal.
 
+
 3️⃣ Frontend setup (in a new terminal)
 
-cd frontend    # Navigate to the frontend folder  
+  - cd frontend    # Navigate to the frontend folder  
 
-npm install    # Install dependencies  
+  - npm install    # Install dependencies  
 
-npm run dev    # Start the frontend  
+  - npm run dev    # Start the frontend  
 
 
 🧪 Test Credentials
