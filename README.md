@@ -1,5 +1,7 @@
 🍔 Burger Restaurant Page
-Description
+
+**Description**
+
 A full-stack application built using React, Node.js with Express, and a MongoDB database.
 All data is stored in MongoDB.
 
@@ -14,7 +16,9 @@ It allows users to:
 ✅ Add personalized products to their cart
 
 The administrator has the ability to:
+
 🔧 Edit and add products
+
 🔧 Manage product add-ons
 
 ⚠️ Note: The ordering button is currently disabled, and placing orders is temporarily unavailable. These features will be restored in the coming days. The application is under continuous development, with new functionalities being added soon.
