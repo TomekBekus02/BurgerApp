@@ -4,6 +4,7 @@ A full-stack application built using React, Node.js with Express, and a MongoDB 
 All data is stored in MongoDB.
 
 It allows users to:
+
 ✅ Register and log in
 
 ✅ Browse products
