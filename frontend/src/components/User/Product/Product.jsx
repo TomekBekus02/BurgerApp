@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../../Contexts/AuthContext"
-//import './Product.css'
+
 import '../../../styles/utilStyles.css'
 import AddProductModal from '../Modals/AddProductModal'
 import productStyles from './Product.module.css'
