@@ -22,10 +22,16 @@
 .product .imgContainer{
     position: relative;
     border-radius: 20px 20px 0 0;
+    width: 350px;
+    height: 230px;
 }
 .imgContainer img{
-    width: 350px;
+    width: 100%;
 }
+.product:hover img{
+    animation: imgAnimation 1s ease-in-out;
+}
+
 .imgContainer h3{
     position: absolute;
     font-size: 24px;
@@ -59,4 +65,16 @@
 }
 .addCartButton:hover{
     background-color: #13a413d0 !important;
+}
+
+@keyframes imgAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
