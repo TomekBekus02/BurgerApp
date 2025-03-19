@@ -20,8 +20,8 @@ export default function AdminHome() {
 
     return (
         <div className={homeStyles.mainBackground}>
-            <div className="d-flex">
-                <InputFilter setFilterProductInput={setFilterProductInput} />
+            <InputFilter setFilterProductInput={setFilterProductInput} />
+            <div className="d-flex justify-content-start flex-md-row flex-column">
                 <button className={`${adminHomeStyles.buttonStyles} btn btn-success`}><Link to="/admin/add-product" className="nav-link">Add product</Link></button>
             </div>
             <div className={homeStyles.products}>

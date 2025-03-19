@@ -1,6 +1,5 @@
 .inputContainer{
     display: inline-block;
-    display: flex;
     margin-bottom: 10px;
     padding-top: 10px;
 }
@@ -13,13 +12,25 @@
     border: none;
     background-color: #484d4d;
     padding: 5px 5px 5px 35px;
+    margin-left: 5px;
     font-size: 22px;
     color: antiquewhite;
 }
 .inputContainer i {
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 12px;
 
     color: #ffffff;
+}
+
+@media screen and (max-width: 900px){
+    .inputContainer input{
+        width: 300px;
+    }
+}
+@media screen and (max-width: 600px){
+    .inputContainer input{
+        width: 200px;
+    }
 }
