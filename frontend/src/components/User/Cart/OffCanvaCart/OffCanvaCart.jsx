@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../../Contexts/UserCartContext"
 import ProductCart from "../CartProduct/ProductCart";
 import OffCanvaCartStyles from './OffCanvaCart.module.css'
+import { useAuth } from "../../../../Contexts/AuthContext";
 
 export default function OffCanvaCart() {
     const { cart, cartTotalPrice } = useCart();
+    const { user } = useAuth();
+    const navigate = useNavigate();
     return (
         <div class={`${OffCanvaCartStyles.offcanvasContainer} offcanvas offcanvas-end`} data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
@@ -42,7 +46,22 @@ export default function OffCanvaCart() {
                         <p className="text-light text-center fs-5">Your Cart is Empty</p>
                 }
                 <h1 className="border-top border-bottom p-3 text-center text-light">Total Price: {cartTotalPrice}zł</h1>
-                <button className="w-100 btn btn-success fs-4" disabled>Order</button>
+                {
+                    user
+                        ?
+                        <button
+                            className="w-100 btn btn-success fs-4"
+                            onClick={() => navigate('/order/delivery')}
+                        > Order
+                        </button>
+                        :
+                        <button
+                            className="w-100 btn btn-success fs-4"
+                            onClick={() => navigate('/login')}
+                        > Order
+                        </button>
+                }
+
 
             </div>
         </div>

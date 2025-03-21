@@ -1,0 +1,33 @@
+.formContainer{
+    padding: 20px;
+}
+.inputTypeBox {
+    display: flex;
+}
+.inputBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    margin: 9px 5px;
+}
+.inputBox label{
+    color: aliceblue;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+.inputBox input{
+    width: 300px;
+    background-color: #767e73b8;
+    border: 3px solid #656966;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: aliceblue;
+    text-align: center;
+}
+.inputBox input:focus{
+    border: 3px solid #d9dbd9;
+    box-shadow: -1px -1px 9px #78a078;
+}

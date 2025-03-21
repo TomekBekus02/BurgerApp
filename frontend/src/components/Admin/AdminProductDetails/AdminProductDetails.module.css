@@ -36,3 +36,14 @@
     color: aliceblue;
     text-align: center;
 }
+.buttonContainer{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+}
+.buttonContainer button{
+    width: 140px;
+    padding: 5px;
+    margin: 0;
+}

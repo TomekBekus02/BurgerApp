@@ -1,0 +1,41 @@
+.orderContainer{
+    max-height: 800px;
+    width: 70%;
+    padding: 12px;
+    background-color: rgb(101, 105, 102);
+    overflow-y: auto;
+}
+.firstProgressBar{
+    width: 33%;
+    font-size: 18px;
+    background-color: green;
+}
+.secondProgressBar{
+    width: 66%;
+    font-size: 18px;
+    background-color: green;
+}
+.thirdProgressBar{
+    width: 100%;
+    font-size: 18px;
+    background-color: green;
+}
+.progressBar {
+    margin: 10px;
+    height: 30px;
+}
+.contentBox {
+    height: 77%;
+    margin: 15px;
+    background-color: rgba(118, 126, 115, 0.722);
+}
+.buttonBox{
+    display: flex;
+    justify-content: end;
+    margin: 0px 15px 10px 0;
+}
+.buttonBox button {
+    font-size: 20px;
+    width: 100px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,18 @@
+.accordionHeader{
+    background-color: rgb(95, 151, 99);
+}
+.accordionHeader:focus,
+.accordionHeader:active{
+    background-color: rgb(55, 131, 48);
+    box-shadow: 1px -1px 5px rgb(107, 229, 88);
+}
+
+.accordionHeader:not(.collapsed){
+    background-color: rgb(92, 137, 88);
+    color: aliceblue;
+}
+.productContent img{
+    width: 250px;
+    height: 250px;
+}
+

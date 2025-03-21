@@ -8,7 +8,7 @@ import { useCart } from "../../../Contexts/UserCartContext";
 import LoginStyles from './Login.module.css';
 
 export default function Login() {
-    const { login, logout } = useAuth();
+    const { login } = useAuth();
     const { updateCart } = useCart();
     const [ifShowPassword, setIfShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function Login() {
                                 name="userEmail"
                                 placeholder=""
                             />
-                            <label for="loginEmail" className="form-label">Email address</label>
+                            <label htmlFor="loginEmail" className="form-label">Email address</label>
                             <div className="invalid-feedback">
                                 Please provide correct email.
                             </div>
@@ -63,7 +63,7 @@ export default function Login() {
                                 name="userPassword"
                                 placeholder=""
                             />
-                            <label for="LoginPassword" className="form-label">Password</label>
+                            <label htmlFor="LoginPassword" className="form-label">Password</label>
                             <div className="invalid-feedback">
                                 Please provide correct password.
                             </div>
