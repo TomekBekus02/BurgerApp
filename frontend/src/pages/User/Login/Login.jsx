@@ -16,8 +16,6 @@ export default function Login() {
     const loginUser = useMutation({
         mutationFn: (newUser) => postLogin(newUser),
         onSuccess: (data) => {
-            // document.getElementById('loginEmail').classList.remove('is-invalid');
-            // document.getElementById('LoginPassword').classList.remove('is-invalid');
             updateCart(data.cart.items, data.cartQuantity, data.cartTotalPrice);
             login(data.token);
             navigate('/');

@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const User = require('../models/user');
+const Order = require('../models/order');
 
 exports.addToCart = async (req, res) => {
     const productId = req.body.productId;
@@ -45,7 +46,17 @@ exports.updateCartQuantity = async (req, res) => {
         cartQuantity += item.quantity
         cartTotalPrice += +item.itemCartPrice * item.quantity
     }
-    //console.log(cartTotalPrice);
     res.status(200).json({messege: "succes updated cart", cart: updatedUser.cart.items, cartQuantity, cartTotalPrice: cartTotalPrice.toFixed(2)});
+}
+
+exports.setOrder = async (req, res) => {
+    const orderData = req.body;
+    console.log(orderData);
+    const order = new Order(orderData);
+    await order.save();
+    const user = await User.findById(orderData.user.userId);
+    user.clearCart();
+    console.log('Created order ');
+    res.status(201).json(order);
 }
 

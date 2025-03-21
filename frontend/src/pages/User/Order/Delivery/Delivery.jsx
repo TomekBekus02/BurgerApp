@@ -70,12 +70,13 @@ export default function Delivery() {
                             <div className={`${DeliveryStyles.inputBox}`}>
                                 <label htmlFor="telDelivery">Tel. Nr.</label>
                                 <input
-                                    type="Number"
+                                    type="text"
                                     name='telDelivery'
                                     defaultValue={deliveryData.phoneNr}
                                     minLength="9"
-                                    pattern='\d{9,}'
-                                    title='Incorrect Number Length'
+                                    pattern='\d{9}'
+                                    title='Number needs to have 9 digits'
+                                    maxLength="9"
                                     required
                                 />
                             </div >

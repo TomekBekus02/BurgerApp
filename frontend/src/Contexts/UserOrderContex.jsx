@@ -17,8 +17,21 @@ export const OrderProvider = ({ children }) => {
         homeNr: ''
     });
 
+    const resetDeliveryData = () => {
+        setDeliveryData({
+            name: '',
+            surname: '',
+            phoneNr: '',
+            email: '',
+            address: '',
+            streetNr: '',
+            homeNr: ''
+        });
+        setPayMethod('');
+    }
+
     return (
-        <OrderContext.Provider value={{ payMethod, deliveryData, selectedMethod, setDeliveryData }}>
+        <OrderContext.Provider value={{ payMethod, deliveryData, selectedMethod, setDeliveryData, resetDeliveryData }}>
             {children}
         </OrderContext.Provider>
     )

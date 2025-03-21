@@ -45,8 +45,16 @@ export const CartProvider = ({ children }) => {
             return userCartTotalPrice ? Number(userCartTotalPrice) : 0;
         });
     }
+    const resetCart = () => {
+        sessionStorage.removeItem("cart");
+        sessionStorage.removeItem("cartQuantity");
+        sessionStorage.removeItem("cartTotalPrice");
+        setCart([]);
+        setCartQuantity(0);
+        setCartTotalPrice(0);
+    }
     return (
-        <CartContex.Provider value={{ cart, cartQuantity, cartTotalPrice, updateCart, LoginSetCart }}>
+        <CartContex.Provider value={{ cart, cartQuantity, cartTotalPrice, updateCart, LoginSetCart, resetCart }}>
             {children}
         </CartContex.Provider>
     )

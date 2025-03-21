@@ -76,6 +76,10 @@ const userSchema = new Schema({
     }
 })
 
+userSchema.methods.clearCart = async function() {
+    this.cart = { items: [] };
+    return this.save();    
+}
 userSchema.methods.addProductToCart = async function(product){
     const { productId, title, imgURL, price, checkedToppings, currentPrice } = product;
     const cartProductIndex = this.cart.items.findIndex(cp => {

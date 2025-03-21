@@ -113,7 +113,6 @@ export const deleteTopping = async (productId, toppingId) => {
 
 export const postLogin = async (User) => {
     const response = await axios.post('http://localhost:3000/auth/login', User);
-    //console.log("In appis: " + JSON.stringify(response.data,null,2));
     return response.data;
 }
 
@@ -126,10 +125,7 @@ export const postSignIn = async (newUser) => {
             return Promise.reject(error.response.data); 
         }
         return Promise.reject(error);
-    }
-    
-    console.log("Response", response, null, 2);
-    
+    }    
 }
 
 export const deleteLogout = async () => await axios.delete('http://localhost:3000/auth/logout');
@@ -141,12 +137,16 @@ export const addProductToCart = async (addedProduct) => {
 
 export const fetchUserCart = async (userId) => {
     const {data} = await axios.get(`http://localhost:3000/userCart/${userId}`);
-    //console.log("Nowy koszyk: " + JSON.stringify(data, null, 2));
     return data;
 }
 
 export const updatedQuantity = async (userId, cartProductId, operation) => {
     const response = await axios.patch(`http://localhost:3000/userCart/${userId}/${cartProductId}?operation=${operation}`)
-    //console.log("jest jakies response: " + JSON.stringify(response.data, null, 2))
     return response.data;
+}
+
+// order
+
+export const subbmitOrder = async (Order) => {
+    return await axios.post('http://localhost:3000/order', Order);
 }

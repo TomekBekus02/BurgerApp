@@ -1,13 +1,50 @@
 import { useNavigate } from 'react-router-dom'
 import Orderstyles from '../Order.module.css'
-import SummaryStyles from './Summary.module.css'
 import { useCart } from '../../../../Contexts/UserCartContext';
 import SummaryAcordion from '../../../../components/User/Order/SummaryAcordion/SummaryAcordion';
 import SummaryUserData from '../../../../components/User/Order/SummaryUserData/SummaryUserData';
+import { useOrder } from '../../../../Contexts/UserOrderContex';
+import { useAuth } from '../../../../Contexts/AuthContext';
+import { useMutation } from '@tanstack/react-query';
+import { subbmitOrder } from '../../../../services/api';
 
 export default function Summary() {
     const navigate = useNavigate();
-    const { cart } = useCart();
+    const { cart, cartTotalPrice, resetCart } = useCart();
+    const { payMethod, deliveryData, resetDeliveryData } = useOrder();
+    const { user } = useAuth();
+
+    const finilizeOrder = useMutation({
+        mutationFn: (orderData) => subbmitOrder(orderData),
+        onSuccess: () => {
+            resetDeliveryData();
+            resetCart();
+            navigate('/');
+            alert('The order has been submitted for processing');
+        }
+    })
+    const handleSubmitOrder = () => {
+        let shorterAddres = deliveryData.address + ' ' + deliveryData.streetNr;
+        if (deliveryData.homeNr !== '') {
+            shorterAddres += '/' + deliveryData.homeNr;
+        }
+        const orderData = {
+            products: cart,
+            delivery: {
+                totalPrice: cartTotalPrice,
+                methodPayment: payMethod,
+                userAdress: shorterAddres
+            },
+            user: {
+                userId: user.userId,
+                userName: deliveryData.name + ' ' + deliveryData.surname,
+                userPhone: deliveryData.phoneNr,
+                userEmail: deliveryData.email
+            }
+        }
+        console.log(JSON.stringify(orderData, null, 2));
+        finilizeOrder.mutate(orderData);
+    }
     return (
         <div className='mainBackground'>
             <div className="container">
@@ -37,11 +74,10 @@ export default function Summary() {
                             <SummaryAcordion />
                             <SummaryUserData />
                         </div>
-                        {console.log(JSON.stringify(cart, null, 2))}
                     </div>
                     <div className={`${Orderstyles.buttonBox}`}>
                         <button className={`${Orderstyles.buttonPrev} btn btn-warning`} onClick={() => navigate('/order/payments')}>Previous</button>
-                        <button className={`${Orderstyles.buttonNext} btn btn-success`} disabled>Order</button>
+                        <button className={`${Orderstyles.buttonNext} btn btn-success`} onClick={handleSubmitOrder}>Order</button>
                     </div>
                 </div>
             </div>
