@@ -5,7 +5,7 @@
 
 A full-stack application built using React, Node.js with Express, and a MongoDB database.
 All data is stored in MongoDB.
-
+<br><br>
 
 
 It allows users to:
@@ -18,6 +18,8 @@ It allows users to:
 
 ✅ Add personalized products to their cart
 
+✅ Finalize the order
+<br><br>
 
 
 The administrator has the ability to:
@@ -26,8 +28,8 @@ The administrator has the ability to:
 
 🔧 Manage product add-ons
 
-⚠️ Note: The ordering button is currently disabled, and placing orders is temporarily unavailable. These features will be restored in the coming days. The application is under continuous development, with new functionalities being added soon.
-
+⚠️ Note: The application is under continuous development, with new functionalities being added soon.
+<br><br>
 
 
 🚀 How to Run This App
@@ -56,7 +58,7 @@ After running npm start, you should see "Database Connected" in your terminal.
   - npm install      # Install dependencies  
 
   - npm run dev      # Start the frontend  
-
+<br><br>
 
 
 🧪 Test Credentials
@@ -64,14 +66,13 @@ After running npm start, you should see "Database Connected" in your terminal.
 You can test the app by creating your own account or using the existing ones:
 
 
-
+<br><br>
 👑 Admin Account
 
 Email: admin@admin.com
 
 Password: Admin123
-
-
+<br><br>
 
 👤 User Account
 
