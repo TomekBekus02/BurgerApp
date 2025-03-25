@@ -5,7 +5,7 @@ export default function SummaryUserData() {
     const { cart, cartTotalPrice } = useCart();
     const { payMethod, deliveryData } = useOrder();
     return (
-        <div className="w-50 p-2">
+        <div className="w-50 p-2 ms-4">
             <h3 className="text-center text-light">Your delivery</h3>
             <div className=''>
                 <h5><i class="fa-solid fa-user"></i> Name: <span>{deliveryData.name} {deliveryData.surname}</span></h5>
