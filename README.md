@@ -65,9 +65,9 @@ After running npm start, you should see "Database Connected" in your terminal.
   - npm run dev      # Start the frontend  
 <br><br>
 
-🔐 Access to Admin panel
-1️⃣ By default after signing in your role is set to 'user'
-2️⃣ To access to Admin panel, you have to change the user's role to "admin" in 'users' collection in MongoDB
+🔐 Access to Admin panel <br>
+1️⃣ By default after signing in your role is set to 'user' <br>
+2️⃣ To access to Admin panel, you have to change the user's role to "admin" in 'users' collection in MongoDB <br>
 
 
 
