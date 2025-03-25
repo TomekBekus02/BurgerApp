@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const { validationResult } = require('express-validator');
 
 
-exports.loginUser = (req, res, next) => {
+exports.loginUser = (req, res) => {
     try {
         const email = req.body.userEmail;
         const password = req.body.userPassword;
@@ -14,7 +14,6 @@ exports.loginUser = (req, res, next) => {
         User.findOne({email: email})
             .then(user => {
                 if(!user){
-                    console.log("Wrong email or password");
                     return res.status(409).json({message: "Wrong email or password"});
                 }
                 bcryptjs.compare(password, user.password)
@@ -39,7 +38,6 @@ exports.loginUser = (req, res, next) => {
 
                         })
                     }
-                    console.log("Wrong email or password");
                     return res.status(409).json({message: "Wrong email or password"});
                 })
                 .catch(err => {
@@ -54,7 +52,7 @@ exports.loginUser = (req, res, next) => {
     }
 }
 
-exports.signupUser = async (req, res, next) => {
+exports.signupUser = async (req, res) => {
     const userName = req.body.userName;
     const email = req.body.userEmail;
     const password = req.body.userPassword;
@@ -98,10 +96,9 @@ exports.signupUser = async (req, res, next) => {
     }
 }
 
-exports.logoutUser = (req, res, next) => {
+exports.logoutUser = (req, res) => {
     try {
         req.session.destroy(err => {
-            console.log(err);
             res.status(200).json({message: "succesfuly logout"});
         })
     } catch (error) {

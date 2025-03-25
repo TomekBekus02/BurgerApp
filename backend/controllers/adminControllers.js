@@ -4,7 +4,7 @@ const Topping = require('../models/topping')
 const mongoose = require('mongoose');
 
 //Product 
-exports.AddProduct = (req,res,next) => {
+exports.AddProduct = (req,res) => {
     const title = req.body.title;
     const price = req.body.price;
     const imgURl = req.body.imgUrl;
@@ -35,15 +35,14 @@ exports.AddProduct = (req,res,next) => {
     product
         .save()
         .then(result => {
-            console.log('Created product: ');
+            res.status(201).json(result);
         })
         .catch(err => {
             console.log(err)
         })
-    res.status(201).json(product);
 }
 
-exports.UpdateProduct = async (req, res, next) => {
+exports.UpdateProduct = async (req, res) => {
     try {
         const productId = req.params.productId;
         const updatedData = req.body;
@@ -77,7 +76,7 @@ exports.UpdateProduct = async (req, res, next) => {
     }
 }
 
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = async (req, res) => {
     try {
         const productId = req.params.productId
         const product = await Product.findByIdAndDelete(productId)
@@ -88,7 +87,7 @@ exports.deleteProduct = async (req, res, next) => {
 }
 //Topping
 
-exports.AddTopping = async (req, res, next) => {
+exports.AddTopping = async (req, res) => {
     try {
         const productId = req.params.productId;
         const title = req.body.title;
@@ -121,7 +120,7 @@ exports.AddTopping = async (req, res, next) => {
     }
 }
 
-exports.UpdateTopping = async (req, res, next) => {
+exports.UpdateTopping = async (req, res) => {
 
     const session = await mongoose.startSession();
     session.startTransaction();  

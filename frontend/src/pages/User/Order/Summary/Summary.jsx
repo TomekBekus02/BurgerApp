@@ -42,7 +42,6 @@ export default function Summary() {
                 userEmail: deliveryData.email
             }
         }
-        console.log(JSON.stringify(orderData, null, 2));
         finilizeOrder.mutate(orderData);
     }
     return (

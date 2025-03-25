@@ -56,7 +56,6 @@ exports.setOrder = async (req, res) => {
     await order.save();
     const user = await User.findById(orderData.user.userId);
     user.clearCart();
-    console.log('Created order ');
     res.status(201).json(order);
 }
 

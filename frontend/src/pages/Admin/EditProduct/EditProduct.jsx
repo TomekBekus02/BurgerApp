@@ -21,7 +21,6 @@ export default function EditProduct() {
             navigate('/admin/admin-home');
         },
         onError: (errors) => {
-            console.log(errors);
             setTitleMsg(errors.title ?? '');
             setPriceMsg(errors.price ?? '');
             inputStyleValidation('productTitle', errors.title);

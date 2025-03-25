@@ -11,7 +11,6 @@ export const CartProvider = ({ children }) => {
         try {
             return JSON.parse(userCart);
         } catch (error) {
-            console.error("Błąd parsowania JSON:", error);
             return [];
         }
     });

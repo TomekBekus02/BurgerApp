@@ -15,7 +15,6 @@ router.post(
             .custom(async (value) => {
                 const userDoc = await User.findOne({email: value});
                 if(userDoc){
-                    console.log("User with this email already exist");
                     throw new Error("User with this email already exist")
                 }       
         }),

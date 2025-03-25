@@ -21,7 +21,6 @@ export default function ProductCart({ cartProductId, quantity, itemCartPrice, ca
     }
     return (
         <div className={`${ProductCartStyles.itemCartContainer}`} >
-            {console.log({ quantity, cartProduct, totalItemPrice: Number(+itemCartPrice * +quantity).toFixed(2), itemCartPrice })}
             <div className={`${ProductCartStyles.itemContainer}`}>
                 <img src={`${cartProduct.imgUrl}`} alt={`${cartProduct.title}`} />
                 <h2>{cartProduct.title}</h2>

@@ -21,7 +21,6 @@ export default function AddTopping() {
             navigate(`/admin/modify-topping/${productId}`);
         },
         onError: (errors) => {
-            console.log(errors);
             setTitleMsg(errors.title ?? '');
             setPriceMsg(errors.price ?? '');
             inputStyleValidation('toppingTitle', errors.title);
