@@ -38,15 +38,20 @@ The administrator has the ability to:
 1️⃣ Clone the repository
 
   - git clone https://github.com/TomekBekus02/BurgerApp.git
+  - cd BurgerApp
 
 
 2️⃣ Backend setup
 
-  - cd backend      # Navigate to the backend folder  
+  - cd backend            # Navigate to the backend folder
+  
+  - cp .env.example .env  # create new file .env and copy env.exmaple file into it
 
-  - npm install     # Install dependencies  
+Edit .env file (set your session key, jwt key and uri dataBase)
 
-  - npm start       # Start the backend  
+  - npm install           # Install dependencies  
+
+  - npm start             # Start the backend  
 
 After running npm start, you should see "Database Connected" in your terminal.
 
@@ -60,24 +65,5 @@ After running npm start, you should see "Database Connected" in your terminal.
   - npm run dev      # Start the frontend  
 <br><br>
 
-
-🧪 Test Credentials
-
-You can test the app by creating your own account or using the existing ones:
-
-
-<br><br>
-👑 Admin Account
-
-Email: admin@admin.com
-
-Password: Admin123
-<br><br>
-
-👤 User Account
-
-Email: test@test.pl
-
-Password: test
 
 
