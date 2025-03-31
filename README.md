@@ -58,7 +58,9 @@ Email: test@test.pl
 
 Password: test
 <br><br><br>
-🚀 How to Run This App
+
+
+🚀 How to Run This App Localy
 
 
 1️⃣ Clone the repository
