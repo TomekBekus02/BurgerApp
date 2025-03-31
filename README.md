@@ -45,7 +45,7 @@ Simply visit the link and start using the application without the need for local
 You can test the app by creating your own account or using the existing ones:
 
 
-<br><br>
+<br>
 👑 Admin Account
 
 Email: admin@admin.com
