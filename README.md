@@ -29,9 +29,36 @@ The administrator has the ability to:
 🔧 Manage product add-ons
 
 ⚠️ Note: The application is under continuous development, with new functionalities being added soon.
+<br><br><br>
+
+🌍 Run the App on AWS
+
+Instead of running the application locally, you can also access the deployed version hosted on AWS:
+
+🔗 http://3.73.122.47
+
+Simply visit the link and start using the application without the need for local setup!
+
+<br><br>
+🧪 Test Credentials
+
+You can test the app by creating your own account or using the existing ones:
+
+
+<br><br>
+👑 Admin Account
+
+Email: admin@admin.com
+
+Password: Admin123
 <br><br>
 
+👤 User Account
 
+Email: test@test.pl
+
+Password: test
+<br><br>
 🚀 How to Run This App
 
 
