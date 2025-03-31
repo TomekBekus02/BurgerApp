@@ -44,7 +44,6 @@ Simply visit the link and start using the application without the need for local
 
 You can test the app by creating your own account or using the existing ones:
 
-
 <br>
 👑 Admin Account
 
@@ -58,7 +57,7 @@ Password: Admin123
 Email: test@test.pl
 
 Password: test
-<br><br>
+<br><br><br>
 🚀 How to Run This App
 
 
