@@ -60,7 +60,7 @@ Password: test
 <br><br><br>
 
 
-🚀 How to Run This App Localy
+🚀 How to Run This App Locally
 
 
 1️⃣ Clone the repository
